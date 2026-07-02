@@ -84,9 +84,9 @@ const platHead =
   HOOKS +
   `import {CD,gCD,calc,D,SK,f0,f1,f2,fp,fd,ZG,ZONES,POT_COLORS,INCS,calcIncPE,calcIE,getHighestZone} from './core.js';\n` +
   `import {IntusLogo,Ic,ic,fmtNum,parseNum,In,R,Card,Sub,MC,PL,Toggle,TerrainTable} from './ui.jsx';\n`;
-// REF_DATA + label tables live between Platform and ReferencialesView in the
-// source, so they land in this slice — export them for Referenciales.jsx.
-const platFoot = `\nexport {Platform,REF_DATA,REF_CONST_LABELS,REF_EQUIP_LABELS,REF_TECH_LABELS};\n`;
+// REF_DATA + label/category tables live between Platform and ReferencialesView
+// in the source, so they land in this slice — export them for Referenciales.jsx.
+const platFoot = `\nexport {Platform,REF_DATA,REF_CATEGORIES,REF_CONST_LABELS,REF_EQUIP_LABELS,REF_TECH_LABELS,REF_CHAR_LABELS};\n`;
 
 // --- src/legacy/Referenciales.jsx ---
 const refBody = slice('referenciales', 'hub');
@@ -94,7 +94,7 @@ const refHead =
   HOOKS +
   `import {f0,f1,f2,fp,fd} from './core.js';\n` +
   `import {Ic,ic,Card,Sub} from './ui.jsx';\n` +
-  `import {REF_DATA,REF_CONST_LABELS,REF_EQUIP_LABELS,REF_TECH_LABELS} from './Platform.jsx';\n`;
+  `import {REF_DATA,REF_CATEGORIES,REF_CONST_LABELS,REF_EQUIP_LABELS,REF_TECH_LABELS,REF_CHAR_LABELS} from './Platform.jsx';\n`;
 const refFoot = `\nexport {ReferencialesView};\n`;
 
 // --- src/legacy/Hub.jsx ---

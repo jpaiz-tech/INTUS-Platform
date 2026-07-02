@@ -639,4 +639,4 @@ const REF_DATA=[
 // REFERENCIALES VIEW COMPONENT
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-export {Platform,REF_DATA,REF_CONST_LABELS,REF_EQUIP_LABELS,REF_TECH_LABELS};
+export {Platform,REF_DATA,REF_CATEGORIES,REF_CONST_LABELS,REF_EQUIP_LABELS,REF_TECH_LABELS,REF_CHAR_LABELS};
