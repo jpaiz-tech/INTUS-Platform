@@ -100,3 +100,7 @@ cd "INTUS Platform/backend"           cd "INTUS Platform/frontend"
 npm install                           npm run dev   → http://localhost:5174
 npm run dev  → :3002
 ```
+
+## Session log 2026-07-02
+- backend npm install completed (node_modules was empty after copy).
+- Capital Research port agent attempts FAILED twice: first died with the previous session process; relaunch blocked by account session limit (resets 1:50am). Module is still the placeholder — redo per the 'In flight' spec above.
