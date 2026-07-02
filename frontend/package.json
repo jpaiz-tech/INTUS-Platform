@@ -1,19 +1,28 @@
 {
-  "name": "etra-frontend",
+  "name": "intus-platform-frontend",
   "version": "1.0.0",
-  "description": "ETRA research pipeline frontend",
+  "description": "INTUS Platform — unified frontend (Prefactibilidad, Mapa, Referenciales, Capital Research)",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "extract": "node scripts/extract-legacy.mjs",
+    "lint:undef": "eslint --no-eslintrc --parser-options=ecmaVersion:2022,sourceType:module,ecmaFeatures:{jsx:true} --env browser,es2022 --rule \"{'no-undef':'error'}\" \"src/legacy/**/*.{js,jsx}\" \"src/data/**/*.js\""
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "leaflet": "^1.9.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.0",
+    "postcss": "^8.4.47",
+    "postcss-nested": "^6.2.0",
+    "tailwindcss": "^3.4.13",
     "vite": "^5.4.0"
   }
 }
