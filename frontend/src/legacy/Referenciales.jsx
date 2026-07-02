@@ -1,6 +1,7 @@
 import {useState,useEffect,useCallback,useMemo,useRef} from 'react';
 import {f0,f1,f2,fp,fd} from './core.js';
 import {Ic,ic,Card,Sub} from './ui.jsx';
+import {REF_DATA,REF_CONST_LABELS,REF_EQUIP_LABELS,REF_TECH_LABELS} from './Platform.jsx';
 const ReferencialesView=()=>{
   const [subTab,setSubTab]=useState("construccion");
   const [selProj,setSelProj]=useState(null);
