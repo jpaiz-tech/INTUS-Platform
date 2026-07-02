@@ -1,0 +1,99 @@
+{
+    name:'Supermercados', sub:'Retail Anchor — DC / Cold Chain',
+    score:82, scoreExact:81.5, assets:['Retail','Industrial'],
+    expanded: false, hasDetail: true,
+    dimScores: [
+      { label:'Promedio',   scores:[83, 83, 88, 77, 88] },
+      { label:'Retail Anchor',   scores:[78, 83, 85, 82, 88] },
+      { label:'DC / Dist.',   scores:[88, 83, 90, 72, 88] },
+    ],
+    tabs: [
+      {
+        label:'Retail (Anchor)', shortLabel:'Retail Anchor', score:80,
+        assets: [{ label:'Retail', score:80 }],
+        dims: [
+          { label:'DURABILIDAD', score:78, confidence:'MEDIUM', color:'#52D688', subs:[
+            { n:'Resistencia tecnológica',  s:7, tag:'PROXY',     note:'Formato supermercado físico resistente a e-commerce en CA/DR. Walmart y PriceSmart integran delivery como canal complementario, no sustituto.' },
+            { n:'Trayectoria al exit',      s:7, tag:'VERIFIED',  note:'Expansión activa de Walmart ($700M en GT) y PriceSmart (apertura La Romana Q2 2026) confirma horizonte positivo dentro del período del fondo.' },
+            { n:'Riesgo regulatorio',       s:8, tag:'ESTIMATED', note:'Bajo riesgo. Sector de alimentos básicos sin amenaza regulatoria material en mercados objetivo.' },
+            { n:'Tendencia secular',         s:9, tag:'VERIFIED', note:'Demanda no discrecional. Remesas ($21B anuales en GT+SV+HN+DR) se convierten directamente en gasto de supermercado.' },
+          ]},
+          { label:'SOLIDEZ', score:83, confidence:'MEDIUM', color:'#52D688', subs:[
+            { n:'Previsibilidad de ingresos',s:9, tag:'ESTIMATED', note:'Ticket promedio y frecuencia de visita altamente predecibles. Contratos de arrendamiento a 10–20 años con escalaciones fijas.' },
+            { n:'Posición de mercado',       s:8, tag:'VERIFIED',  note:'Walmart y PriceSmart controlan posiciones dominantes. Mercado formal sigue creciendo por formalización del consumo en CA/DR.' },
+            { n:'Resistencia competitiva',   s:8, tag:'ESTIMATED', note:'Formato supermercado tiene barreras de entrada significativas — escala, cadena de frío, logística. Independientes no compiten a este nivel.' },
+          ]},
+          { label:'ADHESIÓN', score:85, confidence:'MEDIUM', color:'#52D688', subs:[
+            { n:'Criticidad del espacio', tag:'PROXY', spaceCriticality:{ level:'important', label:'Operationally Significant' }, note:'Formato retail de gran superficie con refrigeración comercial integrada y plataformas de carga especializadas. El anchor puede relocalizarse, pero el costo de fit-out ($320–$800/m²) y el impacto en operaciones de tienda crean fricción real de salida.' },
+            { n:'Inversión en instalaciones', s:9, tag:'PROXY',     note:'Fit-out $320–$800/m². Refrigeración comercial, sistemas de seguridad, plataformas de carga. Costo de reubicación prohibitivo para el anchor.' },
+            { n:'Historial de renovación',    s:8, tag:'ESTIMATED', note:'Tasa de renovación 80–90%. Walmart y PriceSmart raramente abandonan ubicaciones estratégicas dentro del horizonte contractual.' },
+          ]},
+          { label:'SOLVENCIA', score:82, confidence:'HIGH', color:'#52D688', subs:[
+            { n:'Calidad del operador',    s:9, tag:'VERIFIED',  note:'Walmart (NYSE: WMT) — S&P AA. PriceSmart (NASDAQ: PSMT) — sólido. Contrapartes de máxima calidad crediticia en el sector.' },
+            { n:'Dependencia de crédito',  s:9, tag:'VERIFIED',  note:'Garantía corporativa de casa matriz disponible. Documentación estándar multinacional. Sin dependencia de crédito local.' },
+            { n:'Margen operativo',        s:7, tag:'VERIFIED',  note:'Márgenes netos de supermercado son bajos (2–4%) pero la escala los hace sostenibles. El anchor leverage comprime la renta del landlord.' },
+            { n:'Garantías ejecutables',   s:8, tag:'ESTIMATED', note:'Garantías ejecutables estándar. Walmart y PriceSmart tienen historial limpio de cumplimiento contractual en CA/DR.' },
+          ]},
+          { label:'RESILIENCIA', score:88, confidence:'HIGH', color:'#52D688', subs:[
+            { n:'Riesgo de cierre forzado', s:9, tag:'VERIFIED',  note:'Supermercados clasificados como servicio esencial en todos los mercados CA/DR — permanecieron abiertos en pandemia.' },
+            { n:'Demanda esencial vs. discrecional', s:10, tag:'ESTIMATED', note:'Producto alimentario básico. Última categoría en reducirse en cualquier crisis económica.' },
+            { n:'Comportamiento en recesión',        s:9,  tag:'VERIFIED',  note:'Counter-cíclico comprobado — trade-down de restaurantes y tiendas especializadas beneficia directamente al supermercado.' },
+            { n:'Correlación con remesas',           s:9,  tag:'VERIFIED',  note:'GT recibe $21.4B en remesas anuales. Porcentaje significativo se destina directamente a gasto en supermercado.' },
+            { n:'Exposición a ciclos externos',      s:7,  tag:'ESTIMATED', note:'Riesgo si remesas caen por recesión en EE.UU. — transmisión de 1–2 trimestres al consumo CA/DR.' },
+          ]},
+        ]
+      },
+      {
+        label:'Industrial (DC)', shortLabel:'DC / Dist.', score:83,
+        assets: [{ label:'Industrial', score:83 }],
+        dims: [
+          { label:'DURABILIDAD', score:88, confidence:'HIGH', color:'#52D688', subs:[
+            { n:'Resistencia tecnológica',  s:9,  tag:'VERIFIED',  note:'E-commerce impulsa demanda de DCs, no la reduce. Walmart opera 32 DCs regionales que se expanden con el canal digital.' },
+            { n:'Trayectoria al exit',      s:9,  tag:'VERIFIED',  note:'Expansión confirmada de infraestructura logística. $700M Walmart GT incluye componente de supply chain.' },
+            { n:'Riesgo regulatorio',       s:8,  tag:'ESTIMATED', note:'Zonas industriales bien establecidas en GT, PA, CR. Sin riesgo regulatorio material en el horizonte del fondo.' },
+            { n:'Tendencia secular',         s:9,  tag:'VERIFIED', note:'Crecimiento de e-commerce aumenta necesidad de DCs. Formato industrial más robusto que retail en horizonte de 10 años.' },
+          ]},
+          { label:'SOLIDEZ', score:83, confidence:'MEDIUM', color:'#52D688', subs:[
+            { n:'Previsibilidad de ingresos',s:9, tag:'ESTIMATED', note:'Contratos 3PL de 10–20 años con escalaciones contractuales. Flujo de caja altamente predecible.' },
+            { n:'Posición de mercado',       s:8, tag:'ESTIMATED', note:'Mercado de DCs en CA/DR sigue subdesarrollado. Demanda supera oferta institucional en Guatemala y DR.' },
+            { n:'Resistencia competitiva',   s:8, tag:'PROXY',     note:'Barreras de entrada altas. DC con cold chain requiere inversión de $150–$400/m² más certificaciones regulatorias.' },
+          ]},
+          { label:'ADHESIÓN', score:90, confidence:'MEDIUM', color:'#74E8A0', subs:[
+            { n:'Criticidad del espacio', tag:'ESTIMATED', spaceCriticality:{ level:'mission', label:'Mission Critical' }, note:'Infraestructura de cold chain con certificaciones GDP/HACCP vinculadas a la instalación física. Relocalización interrumpe la cadena de suministro completa — las certificaciones se pierden y requieren 12–24 meses para reconstituirse en un nuevo sitio.' },
+            { n:'Inversión en instalaciones', s:9, tag:'PROXY',     note:'Sistemas de refrigeración industrial, muelles de carga, pisos de alta resistencia. $150–$400/m² en fit-out especializado.' },
+            { n:'Historial de renovación',    s:9, tag:'ESTIMATED', note:'Tasa de renovación 85%+. Costo de relocalización de un DC operativo es catastrófico para la cadena de suministro del operador.' },
+          ]},
+          { label:'SOLVENCIA', score:72, confidence:'MEDIUM', color:'#E0B040', subs:[
+            { n:'Calidad del operador',    s:7, tag:'VERIFIED',  note:'Universo arrendable son 3PLs (DHL, CEVA, Ryder) — calificaciones BBB o sin rating público. Walmart posee sus mejores DCs directamente.' },
+            { n:'Dependencia de crédito',  s:7, tag:'ESTIMATED', note:'Garantías corporativas de subsidiarias regionales, no de casa matriz global. Enforcement más complejo que con multinacional directa.' },
+            { n:'Margen operativo',        s:8, tag:'PROXY',     note:'Márgenes EBITDA de 3PLs en CA/DR saludables (8–15%). Contratos a largo plazo protegen margen operativo.' },
+            { n:'Garantías ejecutables',   s:7, tag:'ESTIMATED', note:'Ejecutables pero a nivel de subsidiaria regional. Calidad crediticia real es BBB — por debajo del estándar AAA del fondo.' },
+          ]},
+          { label:'RESILIENCIA', score:88, confidence:'MEDIUM', color:'#52D688', subs:[
+            { n:'Riesgo de cierre forzado', s:10, tag:'VERIFIED',  note:'Cadena de suministro alimentaria — infraestructura crítica. Nunca ha cerrado en ningún evento histórico.' },
+            { n:'Demanda esencial vs. discrecional', s:10, tag:'ESTIMATED', note:'Cadena de suministro alimentaria es infraestructura crítica no interrumpible en ningún escenario.' },
+            { n:'Comportamiento en recesión',        s:9,  tag:'ESTIMATED', note:'DCs de alimentos mantienen operaciones plenas en cualquier ciclo económico. Demanda de almacenamiento no colapsa.' },
+            { n:'Correlación con remesas',           s:8,  tag:'ESTIMATED', note:'Flujo de remesas sostiene consumo alimentario que requiere la infraestructura logística activa.' },
+            { n:'Exposición a ciclos externos',      s:7,  tag:'ESTIMATED', note:'Ligera exposición si contracción severa reduce volúmenes de importación o exportación agroindustrial.' },
+          ]},
+        ]
+      },
+    ],
+    assetChips: [
+      { label:'Retail Anchor', score:80 },
+      { label:'DC / Dist.', score:83 },
+    ],
+    reco: {
+      text: `El sector supermercados y conveniencia es resiliente por construcción: demanda no discrecional, comportamiento counter-cíclico y tasas de renovación que lideran el segmento retail. La industria no está en discusión; el acceso a ella en términos compatibles con el mandato del fondo es el problema central. En el lado retail, Walmart y PriceSmart son exactamente los anchors multinacionales que el fondo busca, pero negocian rentas sistemáticamente por debajo de mercado como condición estructural de entrada, lo que en la mayoría de los casos comprime el cap rate por debajo del umbral de <strong>9–12%</strong> del fondo. En el lado industrial, los mejores operadores poseen sus DCs directamente, dejando como universo arrendable principalmente operadores 3PL (DHL, CEVA, Ryder) con calificación BBB o sin rating público — operadores sólidos pero que pueden no alcanzar el estándar de inquilino del fondo.
+      <br><br>La mejor oportunidad se encuentra en <strong>retail secundario anclado en supermercados</strong> o en <strong>instalaciones logísticas y cold chain</strong> donde el inquilino es suficientemente sólido y el cap rate aún supera el umbral del mandato. Esto implica enfocarse en centros comunitarios de formato mediano (2,000–4,500 m²) con anchor confirmado — no en hipermercados regionales donde el poder de negociación del anchor elimina el margen — y en DCs de 3PL con contratos a largo plazo donde la estructura pueda incluir garantías de escalación y protección ante vacancia. El sector merece seguimiento activo; la entrada correcta existe, pero requiere disciplina de estructuración que la entrada estándar no ofrece.`,
+      verdict: 'Condicional — no perseguir como allocación primaria en formato anchor directo. Enfocar en retail secundario anclado o cold chain / logística con cap rate que supera el mandato.',
+      risks: [
+        { risk:'Recesión EE.UU. → caída de remesas → contracción del consumidor CA/DR', type:'Económico', prob:'Medio', impact:'Alto', horizon:'Cualquier momento — transmisión de 1–2 trimestres' },
+        { risk:'E-commerce grocery erosionando footfall de grandes formatos', type:'Tecnológico', prob:'Bajo–Medio', impact:'Medio', horizon:'2030–2034 — riesgo ventana de salida' },
+        { risk:'Anchor leverage comprimiendo rentas por debajo de mercado', type:'Estructural', prob:'Alto (permanente)', impact:'Medio', horizon:'Presente — característica estructural del sector' },
+        { risk:'Devaluación cambiaria comprimiendo asequibilidad en USD', type:'Económico', prob:'Medio', impact:'Medio', horizon:'Cualquier momento — event-driven' },
+        { risk:'Crédito 3PL por debajo del estándar AAA del mandato', type:'Estructural', prob:'Alto (permanente)', impact:'Medio', horizon:'Presente — aplica a todo el universo arrendable industrial' },
+      ],
+      capexNote: `Walmex asigna <strong>~US$427k por unidad CA</strong> en CapEx total anualizado y <strong>~US$180k por unidad en remodelaciones</strong> — cifra derivada de la participación de CA en ingresos consolidados (17%), no reportada directamente por mercado. PriceSmart reporta <strong>~US$2.8M por club</strong> incluyendo <strong>~US$1.5M de mantenimiento recurrente</strong>, aunque el modelo de propiedad de PriceSmart (~90% activos propios) infla el CapEx respecto de un operador en lease puro. Ambos operadores invierten sobre la planta con independencia del contrato de arrendamiento — señal de que valoran el activo de largo plazo. El riesgo de adhesión estructural no es operativo sino negocial: Walmart y PriceSmart tienen poder de negociación para comprimir rentas en la renovación, y la inversión propia del operador no protege al landlord de esa dinámica.`
+    }
+  },

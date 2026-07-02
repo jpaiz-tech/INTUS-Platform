@@ -1,0 +1,129 @@
+{
+    name:'Cosméticos y Belleza', sub:'Retail Inline — Logística — Showrooms',
+    score:62, scoreExact:62.9, assets:['Retail','Industrial'],
+    expanded: false, hasDetail: true,
+    dimScores: [
+      { label:'Promedio',    scores:[65, 61, 63, 60, 65] },
+      { label:'Retail Inline', scores:[62, 58, 55, 57, 62] },
+      { label:'Industrial',  scores:[68, 65, 72, 63, 68] },
+      { label:'Showroom',    scores:[45, 42, 48, 44, 42] },
+    ],
+    tabs: [
+      {
+        label:'Retail Inline', shortLabel:'Retail Inline', score:59,
+        assets: [{ label:'Retail', score:59 }],
+        dims: [
+          { label:'DURABILIDAD', score:62, confidence:'LOW', color:'#E0B040', subs:[
+            { n:'Resistencia tecnológica', s:5, tag:'PROXY', note:'E-commerce y beauty commerce por IA documentan presión sobre el canal físico en mercados avanzados. CA/DR tiene rezago de 7–10 años, pero el horizonte de 10 años del fondo alcanza ese riesgo.' },
+            { n:'Trayectoria al exit', s:6, tag:'PROXY', note:'Penetración de malls en CA creciendo. Belleza prestige mantiene presencia física en formatos premium. Evidencia CA/DR directa NO ENCONTRADA.' },
+            { n:'Riesgo regulatorio', s:7, tag:'ESTIMATED', note:'Bajo. Retail estándar sin controles de precio ni licencias especiales en los mercados objetivo.' },
+            { n:'Tendencia secular', s:6, tag:'PROXY', note:'Demanda global de cosméticos estructuralmente persistente. Canal físico mantiene dominancia en CA/DR por baja penetración de e-commerce. PROXY-LATAM.' },
+          ]},
+          { label:'SOLIDEZ', score:58, confidence:'LOW', color:'#A0522A', subs:[
+            { n:'Previsibilidad de ingresos', s:5, tag:'ESTIMATED', note:'Ingresos bajo presión creciente de e-commerce. Financieros de subsidiarias locales NO ENCONTRADOS para ningún operador en los cinco mercados ETRA.' },
+            { n:'Posición de mercado', s:7, tag:'PROXY', note:'L\'Oréal, Belcorp, Yanbal presentes en CA/DR. Nombre corporativo no equivale a entidad arrendataria — la entidad contratante es subsidiaria o franquiciado local.' },
+            { n:'Resistencia competitiva', s:5, tag:'ESTIMATED', note:'Mercado fragmentado. Independientes y marcas locales compiten con multinacionales en segmento masivo. Barrera de entrada moderada.' },
+          ]},
+          { label:'ADHESIÓN', score:55, confidence:'LOW', color:'#A0522A', subs:[
+            { n:'Criticidad del espacio', tag:'ESTIMATED', spaceCriticality:{ level:'substitute', label:'Substitutable' }, note:'Footprint pequeño (200–800 m²) con fit-out de marca parcialmente recuperable. Dependencia de tráfico de mall, pero relocalización dentro del mismo centro comercial es viable. Sin infraestructura vinculada al sitio.' },
+            { n:'Inversión en instalaciones', s:5, tag:'ESTIMATED', note:'Fit-out NOT FOUND para CA/DR. PROXY-global sugiere $300–$800/m² para belleza especializada, pero el tenant recupera muebles y fixtures al salir.' },
+            { n:'Historial de renovación', s:5, tag:'PROXY', note:'Plazos típicos "3–5 años" son PROXY-LATAM. Sin datos CA/DR específicos de duración de contratos ni tasas de renovación para el sector.' },
+          ]},
+          { label:'SOLVENCIA', score:57, confidence:'LOW', color:'#A0522A', subs:[
+            { n:'Calidad del operador', s:5, tag:'ESTIMATED', note:'Nombre corporativo (L\'Oréal, P&G, Belcorp) no equivale a calidad del arrendatario. La entidad firmante es subsidiaria local o franquiciado — sin rating público en ningún mercado ETRA.' },
+            { n:'Dependencia de crédito', s:6, tag:'ESTIMATED', note:'Garantía de casa matriz no confirmada para ningún operador en CA/DR. Riesgo de franquiciado aplica en la mayoría del universo invertible.' },
+            { n:'Garantías ejecutables', s:5, tag:'ESTIMATED', note:'Sin evidencia de garantías corporativas ejecutables en contratos de belleza retail CA/DR. USD en Panamá; GT y SV con exposición a moneda local sin cuantificar.' },
+          ]},
+          { label:'RESILIENCIA', score:62, confidence:'LOW', color:'#E0B040', subs:[
+            { n:'Riesgo de cierre forzado', s:6, tag:'PROXY', note:'No esencial — retail cosmético cerró en COVID en varios mercados. CA/DR cerró retail no esencial por 4–12 semanas en 2020. Riesgo real de interrupción de renta.' },
+            { n:'Demanda esencial vs. discrecional', s:6, tag:'PROXY', note:'"Índice del lápiz labial" documentado globalmente — demanda de cosméticos masivos countercíclica. Segmento masivo más resiliente que prestige en recesión.' },
+            { n:'Comportamiento en recesión', s:6, tag:'PROXY', note:'Evidencia global de resiliencia en 2008 y 2020. Sin datos CA/DR específicos de pago de renta ni cierre de tiendas en recesiones locales.' },
+            { n:'Exposición a ciclos externos', s:6, tag:'ESTIMATED', note:'Sensibilidad al ciclo consumidor CA/DR. Riesgo adicional de desplazamiento digital en horizonte de 10 años no mitigado.' },
+          ]},
+        ]
+      },
+      {
+        label:'Industrial (Logística)', shortLabel:'Industrial', score:67,
+        assets: [{ label:'Industrial', score:67 }],
+        dims: [
+          { label:'DURABILIDAD', score:68, confidence:'LOW', color:'#E0B040', subs:[
+            { n:'Resistencia tecnológica', s:7, tag:'PROXY', note:'Infraestructura de distribución de cosméticos no es desplazada por e-commerce — al contrario, e-commerce aumenta demanda de logística de última milla. Evidencia global; PROXY para CA/DR.' },
+            { n:'Trayectoria al exit', s:7, tag:'PROXY', note:'Demanda de logística en CA creciendo con penetración de retail moderno. Importaciones de cosméticos a CA en alza. Datos CA/DR directos escasos.' },
+            { n:'Riesgo regulatorio', s:7, tag:'ESTIMATED', note:'Zonas industriales consolidadas en GT, PA, CR. Sin riesgo regulatorio material para almacenamiento de cosméticos en el horizonte del fondo.' },
+            { n:'Tendencia secular', s:7, tag:'PROXY', note:'Cadena de suministro de cosméticos en CA es estructuralmente dependiente de importación. Demanda de distribución regional sostenida independiente del ciclo económico local.' },
+          ]},
+          { label:'SOLIDEZ', score:65, confidence:'LOW', color:'#E0B040', subs:[
+            { n:'Previsibilidad de ingresos', s:6, tag:'ESTIMATED', note:'Contratos logísticos típicamente 3–5 años. Mejores operadores prefieren activos propios — el universo arrendable se concentra en operadores regionales y 3PLs con perfil crediticio más débil.' },
+            { n:'Posición de mercado', s:7, tag:'PROXY', note:'Belcorp, Yanbal, importadores regionales operan distribución en CA. Mercado logístico de cosméticos subdesarrollado — demanda supera oferta institucional en GT y DR.' },
+            { n:'Resistencia competitiva', s:6, tag:'ESTIMATED', note:'Barreras de entrada moderadas. Temperatura controlada y certificaciones sanitarias crean diferenciación pero no monopolio.' },
+          ]},
+          { label:'ADHESIÓN', score:72, confidence:'LOW', color:'#E0B040', subs:[
+            { n:'Criticidad del espacio', tag:'ESTIMATED', spaceCriticality:{ level:'important', label:'Operationally Significant' }, note:'Temperatura controlada, certificaciones sanitarias y almacenamiento especializado crean fricción de salida real. Relocalización interrumpe cadena de suministro regional — impacto de 3–6 meses para reconstituir operación equivalente.' },
+            { n:'Inversión en instalaciones', s:7, tag:'PROXY', note:'PROXY-global: $80–$200/m² en fit-out industrial especializado para cosméticos. Cifra CA/DR NOT FOUND. Sistemas de temperatura controlada vinculados a la instalación.' },
+            { n:'Historial de renovación', s:7, tag:'ESTIMATED', note:'Plazos 3–5 años PROXY-LATAM. Fricción operativa de salida alta — evidencia indirecta de renovación, sin datos CA/DR verificados.' },
+          ]},
+          { label:'SOLVENCIA', score:63, confidence:'LOW', color:'#E0B040', subs:[
+            { n:'Calidad del operador', s:6, tag:'ESTIMATED', note:'Mejores operadores poseen sus DCs directamente. Universo arrendable: importadores regionales y 3PLs sin rating público. Cap rates NOT FOUND en todos los mercados ETRA.' },
+            { n:'Dependencia de crédito', s:6, tag:'ESTIMATED', note:'Sin datos de garantías corporativas para operadores logísticos de cosméticos en CA/DR. Exposición a entidades locales sin respaldo de casa matriz confirmado.' },
+            { n:'Garantías ejecutables', s:6, tag:'ESTIMATED', note:'USD probable en Panamá y Costa Rica. GT y SV con exposición a moneda local en contratos industriales — no cuantificada para este sector.' },
+          ]},
+          { label:'RESILIENCIA', score:68, confidence:'LOW', color:'#E0B040', subs:[
+            { n:'Riesgo de cierre forzado', s:7, tag:'PROXY', note:'Logística y distribución permanecieron operativos en COVID. Sector industrial no cierra en emergencias — demanda de abastecimiento se mantiene o aumenta.' },
+            { n:'Demanda esencial vs. discrecional', s:7, tag:'PROXY', note:'Distribución de cosméticos no es esencial pero importaciones CA/DR se mantuvieron durante COVID. Supply chain más resiliente que punto de venta directo.' },
+            { n:'Comportamiento en recesión', s:7, tag:'PROXY', note:'Volúmenes de importación de cosméticos en CA mostraron resiliencia en 2020. Sin datos de contratos de arrendamiento industrial en recesiones locales previas.' },
+            { n:'Exposición a ciclos externos', s:6, tag:'ESTIMATED', note:'Dependencia de importación expone al sector a FX y costos de logística global. Sin correlación documentada con remesas.' },
+          ]},
+        ]
+      },
+      {
+        label:'Showroom / Venta Directa', shortLabel:'Showroom', score:44,
+        assets: [{ label:'Retail', score:44 }],
+        dims: [
+          { label:'DURABILIDAD', score:45, confidence:'LOW', color:'#A0522A', subs:[
+            { n:'Resistencia tecnológica', s:4, tag:'PROXY', note:'Modelo de venta directa activamente desplazado por social commerce y apps en LATAM. Belcorp y Yanbal ya transicionan hacia canales digitales en mercados más avanzados.' },
+            { n:'Trayectoria al exit', s:4, tag:'ESTIMATED', note:'Formato en declive estructural en 10 años. Social commerce y delivery app-based sustituyen progresivamente el hub físico de consultoras.' },
+            { n:'Riesgo regulatorio', s:6, tag:'ESTIMATED', note:'Sin riesgo regulatorio directo, pero el modelo de negocio enfrenta riesgo de disintermediación tecnológica estructural.' },
+            { n:'Tendencia secular', s:4, tag:'PROXY', note:'Tendencia secular negativa para showrooms de venta directa. Conversión digital activa en Brasil, México, Colombia.' },
+          ]},
+          { label:'SOLIDEZ', score:42, confidence:'LOW', color:'#8E3A3A', subs:[
+            { n:'Previsibilidad de ingresos', s:4, tag:'ESTIMATED', note:'Ingresos de showrooms de venta directa no documentados. Modelo en transición activa — inestabilidad estructural dentro del período del fondo.' },
+            { n:'Posición de mercado', s:5, tag:'ESTIMATED', note:'Belcorp y Yanbal tienen presencia regional, pero sus showrooms son espacios de apoyo, no el activo rentable principal.' },
+            { n:'Resistencia competitiva', s:4, tag:'PROXY', note:'Comercio social y digital erosiona el modelo activamente. Sin barrera competitiva estructural para el formato showroom.' },
+          ]},
+          { label:'ADHESIÓN', score:48, confidence:'LOW', color:'#A0522A', subs:[
+            { n:'Criticidad del espacio', tag:'ESTIMATED', spaceCriticality:{ level:'substitute', label:'Substitutable' }, note:'Espacios informales o semi-formales, contratos cortos, fit-out mínimo. El operador puede salir sin costo significativo — la reubicación no interrumpe el negocio.' },
+            { n:'Inversión en instalaciones', s:4, tag:'ESTIMATED', note:'Fit-out mínimo. Espacios de 100–400 m² con instalación básica. No crea fricción de salida.' },
+            { n:'Historial de renovación', s:5, tag:'ESTIMATED', note:'Sin datos de renovación. Formato en declive — incentivo a salida mayor que incentivo a renovar.' },
+          ]},
+          { label:'SOLVENCIA', score:44, confidence:'LOW', color:'#8E3A3A', subs:[
+            { n:'Calidad del operador', s:4, tag:'ESTIMATED', note:'Entidad contratante local sin financieros disponibles. Nombre corporativo regional no aplicable a nivel de contrato de showroom.' },
+            { n:'Dependencia de crédito', s:5, tag:'ESTIMATED', note:'Sin garantía corporativa confirmada. Contratos típicamente con entidades locales sin respaldo de casa matriz.' },
+            { n:'Garantías ejecutables', s:4, tag:'ESTIMATED', note:'Moneda local prevalente. Sin evidencia de contratos USD para el formato showroom en CA/DR.' },
+          ]},
+          { label:'RESILIENCIA', score:42, confidence:'LOW', color:'#8E3A3A', subs:[
+            { n:'Riesgo de cierre forzado', s:5, tag:'ESTIMATED', note:'No esencial. Cerró en COVID. Formato más vulnerable del sector ante restricciones de circulación.' },
+            { n:'Demanda esencial vs. discrecional', s:4, tag:'ESTIMATED', note:'Totalmente discrecional. Ninguna componente esencial en el modelo de showroom de venta directa.' },
+            { n:'Comportamiento en recesión', s:4, tag:'PROXY', note:'Alta sensibilidad al ciclo consumidor. Venta directa pierde volumen en recesiones por reducción del gasto discrecional.' },
+            { n:'Exposición a ciclos externos', s:5, tag:'ESTIMATED', note:'Exposición completa al ciclo consumidor local. Riesgo adicional de desplazamiento por social commerce en horizonte corto.' },
+          ]},
+        ]
+      },
+    ],
+    assetChips: [
+      { label:'Retail Inline', score:59 },
+      { label:'Industrial', score:67 },
+      { label:'Showroom', score:44 },
+    ],
+    reco: {
+      text: `Sector con demanda estructural documentada pero con problemas de acceso que limitan la relevancia práctica para ETRA. La brecha entre los nombres que hacen atractivo al sector — L\'Oréal, Belcorp, P&G — y las entidades que efectivamente firman contratos en CA/DR — subsidiarias locales, franquiciados, operadores regionales sin rating — es el problema central. Ningún dato de financieros de subsidiarias locales fue encontrado para los cinco mercados del fondo, lo que impide confirmar el perfil crediticio real a nivel de contrato.<br><br>En formato retail inline, los activos disponibles en el rango <strong>$5–25M</strong> serán predominantemente centros comerciales secundarios con inquilinos de belleza masiva o especializada. El cap rate de estos activos en CA/DR no fue verificado; el umbral de <strong>9–12%</strong> puede ser alcanzable en Guatemala y El Salvador, pero no está documentado.<br><br>En formato industrial, la oportunidad es más sólida estructuralmente — la logística de cosméticos en CA requiere infraestructura de temperatura controlada que los mejores operadores no construyen por sí solos en todos los mercados. El problema es que los mejores operadores prefieren activos propios, dejando el universo arrendable concentrado en operadores secundarios. Una adquisición en este sector requiere confirmar la entidad arrendataria, el plazo, el cap rate, y la denominación en USD antes de avanzar.`,
+      verdict: 'Watchlist — no perseguir como allocación primaria. Retail inline requiere confirmar entidad arrendataria y cap rate. Industrial es estructuralmente más sólido pero el universo de mejores operadores es propietario.',
+      risks: [
+        { risk:'Entidad arrendataria es subsidiaria local o franquiciado sin financieros verificables', type:'Crédito', prob:'Alto (permanente)', impact:'Alto', horizon:'Presente — aplica a todo el universo arrendable' },
+        { risk:'E-commerce y beauty commerce digital desplazando canal físico en horizonte 10 años', type:'Tecnológico', prob:'Bajo–Medio', impact:'Medio', horizon:'2030–2034 — riesgo ventana de salida' },
+        { risk:'Mejores operadores prefieren activos propios — universo arrendable concentrado en operadores secundarios', type:'Estructural', prob:'Alto (permanente)', impact:'Medio', horizon:'Presente — característica estructural del sector' },
+        { risk:'Cap rates no documentados en ningún mercado ETRA — umbral 9–12% no verificable', type:'Mercado', prob:'Medio', impact:'Alto', horizon:'Presente — bloquea due diligence hasta encontrar transacción comparable' },
+        { risk:'Contratos en moneda local en GT y SV — exposición cambiaria no cuantificada', type:'Moneda', prob:'Medio', impact:'Medio', horizon:'Cualquier momento — event-driven' },
+      ],
+      capexNote: `Fit-out de belleza especializada estimado en <strong>$300–$800/m²</strong> globalmente (PROXY — sin datos CA/DR verificados), concentrado en muebles de marca, iluminación y sistemas de display parcialmente recuperables al cierre. A diferencia de anchor retail o industrial con cold chain, el fit-out de beauty retail no está vinculado a la infraestructura del inmueble — el tenant puede llevarse los activos, lo que reduce la fricción de salida real. En formato industrial, temperatura controlada y certificaciones sanitarias representan <strong>$80–$200/m²</strong> adicionales (PROXY-global) vinculados al activo, creando mayor stickiness estructural que el formato retail.`
+    }
+  },

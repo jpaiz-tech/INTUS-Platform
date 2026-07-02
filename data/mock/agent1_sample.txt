@@ -1,0 +1,148 @@
+# {{industry}} — Agent 1 Research Output
+
+> **Note:** This is a mock output for testing app flow. No real Claude API call was made.
+
+---
+
+## 1. SUB-SECTORS & FORMATS
+
+The {{industry}} sector includes several distinct sub-sectors with different real estate footprints. Operators range from large institutional chains to independent local businesses. Lease vs. own patterns vary significantly by sub-sector and country. The strongest operators in this space tend to lease rather than own their real estate, preserving capital flexibility.
+
+Sample placeholder content — replace this file with real Agent 1 output when ready.
+
+---
+
+## 2. FORMAT MAP
+
+| Sub-Sector | RE Format | Tenant Type | Own/Lease | Space Criticality | ETRA Relevance | Notes |
+| ---------- | --------- | ----------- | --------- | ----------------- | -------------- | ----- |
+| Example A  | Retail Strip | Corporate Chain | Lease | MISSION-CRITICAL | Medium | Placeholder |
+| Example B  | Industrial Warehouse | Institutional | Lease | IMPORTANT | High | Placeholder |
+| Example C  | Office | Independent | Mixed | SUBSTITUTABLE | Low | Placeholder |
+
+---
+
+## 3. CA/DR MARKET
+
+| Country | Tenant Demand | Credit Quality | RE Availability | ETRA Attractiveness | Evidence Quality |
+| ------- | ------------- | -------------- | --------------- | ------------------- | ---------------- |
+| Guatemala | Medium | Medium | Medium | Selective | ESTIMATED |
+| Costa Rica | High | High | Low | Primary | PROXY |
+| Panama | High | High | Medium | Primary | PROXY |
+| El Salvador | Low | Low | High | Watchlist | ESTIMATED |
+| Dominican Republic | Medium | Medium | Medium | Selective | ESTIMATED |
+
+---
+
+## 4. HARD DATA
+
+| Variable | Value | Geography | Source | URL | Confidence | Notes |
+| -------- | ----- | --------- | ------ | --- | ---------- | ----- |
+| Avg. Lease Term | 5–10 years | CA/DR | NOT FOUND | N/A | Low | No direct CA/DR data |
+| Renewal Rate | ~60–70% | U.S. (PROXY) | NOT FOUND | N/A | Low | Proxy only |
+| Avg. Rent (Retail) | $15–30 psf/yr | CA/DR | ESTIMATED | N/A | Low | Placeholder |
+| USD Lease Evidence | Partial | Panama | ESTIMATED | N/A | Medium | USD leases common in Panama |
+| Vacancy Rate | NOT FOUND | CA/DR | NOT FOUND | N/A | — | No data available |
+
+---
+
+## 5. CAPEX / FIT-OUT EXAMPLES
+
+| Format | CapEx / Fit-Out Item | Typical Cost or Range | Who Pays | Geography | Source | URL | Confidence | ETRA Implication |
+| ------ | -------------------- | --------------------- | -------- | --------- | ------ | --- | ---------- | ---------------- |
+| Retail | Store build-out, signage, shelving | $50–150/sqft | Tenant | U.S. (PROXY) | ESTIMATED | N/A | Low | Creates moderate stickiness |
+| Industrial | Racking, loading dock modifications | $20–80/sqft | Tenant | U.S. (PROXY) | ESTIMATED | N/A | Low | Creates high stickiness |
+| Office | Call center fit-out, IT rooms | $30–100/sqft | Tenant | U.S. (PROXY) | ESTIMATED | N/A | Low | Moderate stickiness |
+
+CapEx creates real stickiness only when it is tenant-paid and operationally integrated. Cosmetic investment (paint, furniture) does not create meaningful renewal pressure.
+
+---
+
+## 6. STICKINESS
+
+Stickiness varies significantly by format. Industrial tenants with specialized equipment installations are the stickiest. Retail tenants with branded fit-outs have moderate stickiness. Office tenants with standard layouts are the least sticky.
+
+Relocation difficulty is highest where:
+- Tenant has invested in specialized infrastructure
+- The format is operationally integrated (not just aesthetics)
+- Regulatory approvals are tied to the specific address
+
+---
+
+## 7. RESILIENCE
+
+| Format | Recession | Pandemic | Political Crisis | Demand Shock | Classification |
+| ------ | --------- | -------- | ---------------- | ------------ | -------------- |
+| Essential Retail | Low risk | Low risk | Medium risk | Low risk | Essential |
+| Discretionary Retail | High risk | High risk | Medium risk | High risk | Cyclical |
+| Industrial / Logistics | Low risk | Low risk | Low risk | Medium risk | Semi-essential |
+| Office | Medium risk | High risk | Medium risk | Medium risk | Discretionary |
+
+---
+
+## 8. STRESS TESTS
+
+**AI/tech displacement risk:** Medium. Back-office functions are increasingly automated. Physical formats tied to in-person service or logistics are more resilient.
+
+**Pandemic or emergency shock:** Moderate risk for retail; lower risk for industrial. During COVID-19, essential-format tenants held; discretionary retail collapsed.
+
+**Regulatory risk:** Low to medium. No specific regulatory concentration risk identified in CA/DR for this sector.
+
+**Oversupply risk:** Medium in Panama and Costa Rica, where retail construction has outpaced demand in certain corridors.
+
+**Disintermediation risk:** Low for physical-format tenants. E-commerce displacement risk is real for some retail sub-sectors but has not materialized at scale in CA/DR.
+
+**FX / U.S.-cycle exposure:** Medium. Several CA/DR economies are highly dollarized or USD-tied. U.S. recession would reduce remittances and consumer spending.
+
+---
+
+## 9. TOP TENANTS + FAILURE CASES
+
+| Company | Country/Region | Format | Case Type | Credit Read | Own/Lease Info | ETRA Lesson | Source | Confidence |
+| ------- | -------------- | ------ | --------- | ----------- | -------------- | ----------- | ------ | ---------- |
+| Example Strong Tenant A | Panama | Retail | Strong | Investment Grade | Lease | Anchor tenant quality | ESTIMATED | Low |
+| Example Strong Tenant B | Costa Rica | Industrial | Strong | Sub-Investment Grade | Lease | Reliable but watch credit | ESTIMATED | Low |
+| Example Strong Tenant C | Guatemala | Office | Strong | Unknown | Mixed | Regional operator | ESTIMATED | Low |
+| Cautionary Case A | Regional | Retail | Failure | Defaulted | Lease | Rapid expansion, poor unit economics | ESTIMATED | Low |
+| Cautionary Case B | Regional | Office | Failure | Restructured | Lease | COVID-driven vacancy | ESTIMATED | Low |
+| Cautionary Case C | Regional | Industrial | Failure | Unknown | Unknown | Regulatory closure | ESTIMATED | Low |
+
+---
+
+## 10. SCORE RANGES
+
+*These are suggested ranges only. No final score is assigned.*
+
+| Dimension | Weight | Suggested Range | Positive Evidence | Negative Evidence | Confidence |
+| --------- | ------ | --------------- | ----------------- | ----------------- | ---------- |
+| Durabilidad | 27% | 55–70 | Long lease terms in some formats | Weak CA/DR data | Low |
+| Solidez | 22% | 50–65 | Some institutional operators present | Many independents | Low |
+| Adhesión | 18% | 55–75 | CapEx investment in industrial | Low stickiness in office | Low |
+| Solvencia | 16% | 45–60 | Strong operators in Panama/CR | Mixed credit across region | Low |
+| Resiliencia | 17% | 50–65 | Essential formats resilient | Discretionary formats vulnerable | Low |
+
+---
+
+## 11. RECOMMENDATION
+
+**Allocation category:** Selective
+
+**Acceptable formats:** Industrial (preferred), Essential Retail (selective)
+
+**Acceptable countries:** Panama, Costa Rica (primary); Guatemala, Dominican Republic (selective); El Salvador (watchlist)
+
+**Tenant types to avoid:** Small independent operators, franchisees without corporate guarantees, discretionary retail without anchor credit
+
+**Rejection condition:** Reject if tenant is independent operator with less than 3-year operating history and no balance sheet guarantee
+
+**Required acquisition-level stress test:** Verify tenant credit directly; confirm fit-out investment is tenant-paid; confirm USD lease terms; stress-test at 20% rent reduction and 12-month re-tenanting period
+
+**Main data gaps:**
+- No direct CA/DR lease term or renewal rate data
+- No CA/DR cap rate comparables for this sector
+- Tenant credit quality in CA/DR is largely unverified
+- USD lease penetration outside Panama is unclear
+
+---
+
+*This is a MOCK OUTPUT for testing purposes. Replace `data/mock/agent1_sample.txt` with real sample output when testing research quality.*

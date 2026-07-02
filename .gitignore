@@ -1,0 +1,22 @@
+# Environment
+.env
+*.env.local
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Research run data (keep .gitkeep, ignore actual run files)
+data/runs/*.json
+
+# Generated dashboard outputs (ephemeral — recreated at runtime)
+data/dashboard-outputs/
+
+# Claude Code local config
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
