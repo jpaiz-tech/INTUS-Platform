@@ -13,6 +13,7 @@ import { dashboardHtmlRouter } from './routes/dashboardHtml.js';
 import { analyticsRouter } from './routes/analytics.js';
 import { reportRouter } from './routes/report.js';
 import { marketDataRouter } from './routes/marketData.js';
+import { requireAuth } from './middleware/requireAuth.js';
 
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -24,6 +25,9 @@ const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json({ limit: '50mb' })); // 50mb — valuation PDFs can be 20MB+ as base64
+// Optional Supabase-token auth (REQUIRE_AUTH=true) — see middleware/requireAuth.js
+app.use('/api', requireAuth);
+app.use('/dashboard-outputs', requireAuth);
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 // Supabase diagnostic — tests connection and table access
