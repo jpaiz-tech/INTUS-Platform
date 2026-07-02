@@ -86,19 +86,19 @@ export default function ChatView() {
   const hasMessages = messages.length > 0;
 
   return (
-    <div className="mi-chat-wrap">
+    <div className="flex flex-col gap-4">
 
       {/* Thread */}
       {hasMessages && (
-        <div className="mi-thread">
+        <div className="flex flex-col gap-4">
           {messages.map((msg, i) => (
-            <div key={i} className="mi-thread-item">
-              <div className="mi-thread-query">
-                <span className="mi-thread-q-label">Consulta</span>
-                <span className="mi-thread-q-text">{msg.query}</span>
+            <div key={i} className="flex flex-col gap-2">
+              <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 text-sm text-slate-700 self-end max-w-[85%]">
+                <span className="text-[11px] font-bold text-emerald-600 uppercase tracking-wider mr-2">Consulta</span>
+                <span>{msg.query}</span>
               </div>
               {msg.error && (
-                <div className="mi-chat-error"><strong>Error:</strong> {msg.error}</div>
+                <div className="bg-red-50 border border-red-200 rounded-lg text-xs text-red-600 p-3"><strong>Error:</strong> {msg.error}</div>
               )}
               {msg.response && (
                 <ResponseCard response={msg.response} query={msg.query} />
@@ -107,8 +107,8 @@ export default function ChatView() {
           ))}
 
           {loading && (
-            <div className="mi-loading">
-              <span className="mi-spinner-lg" />
+            <div className="flex items-center gap-2 text-sm text-slate-400">
+              <span className="inline-block w-5 h-5 border-2 border-slate-200 border-t-emerald-500 rounded-full animate-spin" />
               <span>Consultando base de datos y generando análisis…</span>
             </div>
           )}
@@ -118,30 +118,36 @@ export default function ChatView() {
 
       {/* Suggestions — only before first message */}
       {!hasMessages && !loading && (
-        <div className="mi-suggestions">
-          <div className="mi-suggestions-label">Sugerencias</div>
-          <div className="mi-suggestions-list">
+        <div>
+          <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Sugerencias</div>
+          <div className="flex flex-wrap gap-2">
             {SUGGESTIONS.map((s, i) => (
-              <button key={i} className="mi-suggestion-chip" onClick={() => useSuggestion(s)}>{s}</button>
+              <button
+                key={i}
+                className="bg-white border border-slate-200 text-slate-500 rounded-lg text-xs font-semibold px-3 py-2 hover:border-emerald-300 hover:text-emerald-600 transition-all"
+                onClick={() => useSuggestion(s)}
+              >
+                {s}
+              </button>
             ))}
           </div>
         </div>
       )}
 
       {/* Input — always visible */}
-      <div className={`mi-chat-form-wrap${hasMessages ? ' mi-chat-form-wrap--thread' : ''}`}>
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
         {hasMessages && (
-          <div className="mi-chat-followup-hints">
+          <div className="flex flex-wrap items-center gap-2 text-xs text-slate-400 mb-3">
             <span>Puedes continuar: </span>
-            <button className="mi-hint-chip" onClick={() => setInput('Agrega datos de retail a este análisis')}>+ agregar retail</button>
-            <button className="mi-hint-chip" onClick={() => setInput('Filtra solo las subzonas con disponibilidad menor a 15%')}>filtrar por disponibilidad</button>
-            <button className="mi-hint-chip" onClick={() => setInput('Genera un reporte completo con estos datos')}>generar reporte</button>
-            <button className="mi-hint-chip mi-hint-clear" onClick={handleClear}>✕ nueva consulta</button>
+            <button className="border border-slate-200 text-slate-500 rounded-full text-xs px-3 py-1 hover:border-emerald-300 hover:text-emerald-600 transition-all" onClick={() => setInput('Agrega datos de retail a este análisis')}>+ agregar retail</button>
+            <button className="border border-slate-200 text-slate-500 rounded-full text-xs px-3 py-1 hover:border-emerald-300 hover:text-emerald-600 transition-all" onClick={() => setInput('Filtra solo las subzonas con disponibilidad menor a 15%')}>filtrar por disponibilidad</button>
+            <button className="border border-slate-200 text-slate-500 rounded-full text-xs px-3 py-1 hover:border-emerald-300 hover:text-emerald-600 transition-all" onClick={() => setInput('Genera un reporte completo con estos datos')}>generar reporte</button>
+            <button className="border border-slate-200 text-slate-400 rounded-full text-xs px-3 py-1 hover:border-red-300 hover:text-red-500 transition-all" onClick={handleClear}>✕ nueva consulta</button>
           </div>
         )}
-        <form className="mi-chat-form" onSubmit={handleSubmit}>
+        <form className="flex gap-2 items-end" onSubmit={handleSubmit}>
           <textarea
-            className="mi-chat-input"
+            className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:border-emerald-400 resize-none"
             value={input}
             onChange={e => setInput(e.target.value)}
             placeholder={hasMessages
@@ -150,8 +156,12 @@ export default function ChatView() {
             rows={2}
             onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSubmit(e); } }}
           />
-          <button type="submit" className="mi-chat-submit" disabled={loading || !input.trim()}>
-            {loading ? <span className="mi-spinner" /> : 'Consultar →'}
+          <button
+            type="submit"
+            className="bg-emerald-500 text-white rounded-lg text-xs font-semibold px-4 py-2.5 hover:bg-emerald-600 transition-all disabled:opacity-50 whitespace-nowrap"
+            disabled={loading || !input.trim()}
+          >
+            {loading ? <span className="inline-block w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" /> : 'Consultar →'}
           </button>
         </form>
       </div>

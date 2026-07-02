@@ -361,3 +361,42 @@ export async function exportMarketData(filters = {}) {
   const rows = await queryMarketData(filters);
   return rows;
 }
+
+// Record one ingestion event (a PDF or pasted-text upload that was confirmed).
+// Best-effort — a logging failure shouldn't fail the confirm request.
+export async function logIngestion(entry) {
+  if (!supabase) return null;
+
+  const { data, error } = await supabase
+    .from('market_data_ingestions')
+    .insert({
+      source_type:        entry.source_type,
+      file_name:          entry.file_name || null,
+      source_description: entry.source_description || null,
+      extraction_notes:   entry.extraction_notes || null,
+      rows_proposed:      entry.rows_proposed || 0,
+      rows_inserted:      entry.rows_inserted || 0,
+      rows_updated:       entry.rows_updated || 0,
+    })
+    .select().single();
+
+  if (error) {
+    console.error(`[market-data] logIngestion error: ${error.message}`);
+    return null;
+  }
+  return data;
+}
+
+// Ingestion history for the "Historial" tab in Cargar Datos.
+export async function getIngestionHistory(limit = 100) {
+  if (!supabase) return [];
+
+  const { data, error } = await supabase
+    .from('market_data_ingestions')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  if (error) throw new Error(`ingestion history query: ${error.message}`);
+  return data || [];
+}

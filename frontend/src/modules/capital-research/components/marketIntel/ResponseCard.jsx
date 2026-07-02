@@ -5,15 +5,15 @@ const BASE = import.meta.env.VITE_API_BASE || '';
 
 function MetricCard({ card }) {
   return (
-    <div className={`mi-card${card.missing ? ' mi-card-missing' : ''}`}>
-      <div className="mi-card-label">{card.label}</div>
+    <div className={`bg-white rounded-xl border border-slate-200 p-4 ${card.missing ? 'opacity-50' : ''}`}>
+      <div className="text-[11px] text-slate-400 uppercase tracking-wider mb-1">{card.label}</div>
       {card.missing ? (
-        <div className="mi-card-value mi-card-na">—</div>
+        <div className="text-xl font-bold text-slate-300 font-mono">—</div>
       ) : (
-        <div className="mi-card-value">{card.value}<span className="mi-card-unit">{card.unit}</span></div>
+        <div className="text-xl font-bold text-slate-800 font-mono">{card.value}<span className="text-xs text-slate-400 ml-1">{card.unit}</span></div>
       )}
-      {!card.missing && card.period && <div className="mi-card-meta">{card.period}</div>}
-      {card.missing && <div className="mi-card-meta mi-card-no-data">sin datos</div>}
+      {!card.missing && card.period && <div className="text-[11px] text-slate-400 mt-1">{card.period}</div>}
+      {card.missing && <div className="text-[11px] text-slate-300 mt-1">sin datos</div>}
     </div>
   );
 }
@@ -21,17 +21,19 @@ function MetricCard({ card }) {
 function DataTable({ table }) {
   if (!table) return null;
   return (
-    <div className="mi-table-section">
-      <div className="mi-section-label">{table.title}</div>
-      <div className="mi-table-wrap">
-        <table className="mi-table">
+    <div className="flex flex-col gap-2">
+      <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">{table.title}</div>
+      <div className="overflow-x-auto bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
+        <table className="w-full text-sm">
           <thead>
-            <tr>{table.headers.map((h, i) => <th key={i}>{h}</th>)}</tr>
+            <tr className="border-b-2 border-slate-200">
+              {table.headers.map((h, i) => <th key={i} className="text-left py-2 px-3 text-xs font-bold text-slate-400 uppercase">{h}</th>)}
+            </tr>
           </thead>
           <tbody>
             {table.rows.map((row, ri) => (
-              <tr key={ri}>
-                {row.map((cell, ci) => <td key={ci}>{cell ?? '—'}</td>)}
+              <tr key={ri} className="border-b border-slate-100 hover:bg-emerald-50/30">
+                {row.map((cell, ci) => <td key={ci} className="py-2 px-3 font-mono text-xs text-slate-700">{cell ?? '—'}</td>)}
               </tr>
             ))}
           </tbody>
@@ -47,19 +49,19 @@ function ReportSection({ md }) {
 
   const lines = md.split('\n');
   const rendered = lines.map((line, i) => {
-    if (line.startsWith('## ')) return <h3 key={i} className="mi-report-h2">{line.slice(3)}</h3>;
-    if (line.startsWith('# '))  return <h2 key={i} className="mi-report-h1">{line.slice(2)}</h2>;
-    if (line.startsWith('- '))  return <li key={i} className="mi-report-li">{line.slice(2)}</li>;
+    if (line.startsWith('## ')) return <h3 key={i} className="text-sm font-bold text-slate-700 mt-2">{line.slice(3)}</h3>;
+    if (line.startsWith('# '))  return <h2 key={i} className="text-base font-bold text-slate-800 mt-2">{line.slice(2)}</h2>;
+    if (line.startsWith('- '))  return <li key={i} className="text-sm text-slate-600 ml-4 list-disc">{line.slice(2)}</li>;
     if (line.trim() === '')     return <br key={i} />;
-    return <p key={i} className="mi-report-p">{line}</p>;
+    return <p key={i} className="text-sm text-slate-600">{line}</p>;
   });
 
   return (
-    <div className="mi-report-section">
-      <button className="mi-report-toggle" onClick={() => setOpen(o => !o)}>
+    <div className="border-t border-slate-100 pt-3">
+      <button className="text-xs font-semibold text-emerald-600 hover:underline" onClick={() => setOpen(o => !o)}>
         {open ? '▲ Ocultar reporte completo' : '▼ Ver reporte completo'}
       </button>
-      {open && <div className="mi-report-body">{rendered}</div>}
+      {open && <div className="mt-3 flex flex-col gap-1">{rendered}</div>}
     </div>
   );
 }
@@ -81,20 +83,20 @@ export default function ResponseCard({ response, query }) {
   }
 
   return (
-    <div className="mi-response">
+    <div className="bg-white border border-slate-200 rounded-2xl p-4 text-sm text-slate-700 flex flex-col gap-4">
       {interpreted_as && (
-        <div className="mi-interpreted">
-          <span className="mi-interpreted-label">Interpretado como:</span> {interpreted_as}
+        <div className="text-xs text-slate-500 bg-slate-50 rounded-lg px-3 py-2 flex items-center gap-2 flex-wrap">
+          <span className="font-semibold text-slate-600">Interpretado como:</span> {interpreted_as}
           {rows_used != null && (
-            <span className="mi-rows-badge">{rows_used} {rows_used === 1 ? 'registro' : 'registros'}</span>
+            <span className="text-[11px] font-mono bg-emerald-50 text-emerald-700 rounded-full px-2 py-0.5 ml-auto">{rows_used} {rows_used === 1 ? 'registro' : 'registros'}</span>
           )}
         </div>
       )}
 
-      {summary && <div className="mi-summary">{summary}</div>}
+      {summary && <div className="text-sm text-slate-700 leading-relaxed">{summary}</div>}
 
       {metric_cards.length > 0 && (
-        <div className="mi-cards-grid">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
           {metric_cards.map((card, i) => <MetricCard key={i} card={card} />)}
         </div>
       )}
@@ -102,7 +104,7 @@ export default function ResponseCard({ response, query }) {
       <DataTable table={table} />
 
       {charts.length > 0 && (
-        <div className="mi-charts-section">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {charts.map((chart, i) => (
             <MiniChart key={i} type={chart.type} title={chart.title} labels={chart.labels} datasets={chart.datasets} />
           ))}
@@ -110,18 +112,18 @@ export default function ResponseCard({ response, query }) {
       )}
 
       {gaps.length > 0 && (
-        <div className="mi-gaps">
-          <div className="mi-section-label">Datos faltantes</div>
-          <ul className="mi-gaps-list">
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+          <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Datos faltantes</div>
+          <ul className="list-disc list-inside text-xs text-amber-700 flex flex-col gap-1">
             {gaps.map((g, i) => <li key={i}>{g}</li>)}
           </ul>
         </div>
       )}
 
       {sources.length > 0 && (
-        <div className="mi-sources">
-          <div className="mi-section-label">Fuentes</div>
-          <ul className="mi-sources-list">
+        <div className="bg-slate-50 rounded-lg p-3">
+          <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Fuentes</div>
+          <ul className="list-disc list-inside text-xs text-slate-500 flex flex-col gap-1">
             {sources.map((s, i) => <li key={i}>{s}</li>)}
           </ul>
         </div>
@@ -129,9 +131,9 @@ export default function ResponseCard({ response, query }) {
 
       <ReportSection md={report_md} />
 
-      <div className="mi-export-bar">
-        <button className="mi-export-btn" onClick={handlePrintReport}>↓ Imprimir / PDF</button>
-        <button className="mi-export-btn mi-export-btn-ghost" onClick={handleExportCSV}>↓ Exportar CSV</button>
+      <div className="flex gap-2 pt-2 border-t border-slate-100">
+        <button className="border border-slate-200 text-slate-500 rounded-lg text-xs font-semibold px-4 py-2 hover:border-emerald-300 hover:text-emerald-600 transition-all" onClick={handlePrintReport}>↓ Imprimir / PDF</button>
+        <button className="text-slate-400 hover:text-emerald-600 text-xs font-semibold transition-all" onClick={handleExportCSV}>↓ Exportar CSV</button>
       </div>
     </div>
   );

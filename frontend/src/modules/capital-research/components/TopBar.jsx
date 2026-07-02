@@ -1,25 +1,18 @@
-import logoIntus from '../assets/logo-intus.png';
-import logoEtra  from '../assets/logo-etra.png';
-
+// The global app header (App.jsx) already shows the INTUS logo and module
+// nav, so the old standalone branding bar is redundant here. All that
+// remains functionally necessary is the edit-mode toggle, rendered as a
+// small button inline in CapitalResearch.jsx's dashboard toolbar.
 export default function TopBar({ editMode, onToggleEdit }) {
   return (
-    <div className="topbar">
-      <div className="topbar-left">
-        <img src={logoIntus} className="brand-logo-intus" alt="Intus" />
-      </div>
-      <div className="topbar-center">
-        <div className="topbar-center-title">ETRA Legacy Fund</div>
-        <div className="topbar-center-sub">Industry Scoring &amp; Analysis</div>
-      </div>
-      <div className="topbar-right">
-        <img src={logoEtra} className="brand-logo-etra" alt="ETRA" />
-        <button
-          className={`edit-toggle-btn${editMode ? ' active' : ''}`}
-          onClick={onToggleEdit}
-        >
-          {editMode ? 'Salir de edición' : 'Editar'}
-        </button>
-      </div>
-    </div>
+    <button
+      onClick={onToggleEdit}
+      className={
+        editMode
+          ? 'bg-emerald-500 text-white rounded-lg text-xs font-semibold px-4 py-2 hover:bg-emerald-600 transition-all'
+          : 'border border-slate-200 text-slate-500 rounded-lg text-xs font-semibold px-4 py-2 hover:border-emerald-300 hover:text-emerald-600 transition-all'
+      }
+    >
+      {editMode ? 'Salir de edición' : 'Editar'}
+    </button>
   );
 }

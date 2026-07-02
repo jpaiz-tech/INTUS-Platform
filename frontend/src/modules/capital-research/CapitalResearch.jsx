@@ -93,87 +93,84 @@ function IndustriasSection() {
     }
   }
 
+  const innerTabBtn = (id, label) => (
+    <button
+      key={id}
+      onClick={() => setActiveTab(id)}
+      className={
+        activeTab === id
+          ? 'bg-emerald-500 text-white rounded-lg text-xs font-semibold px-4 py-2'
+          : 'text-slate-400 hover:bg-slate-50 rounded-lg text-xs font-semibold px-4 py-2'
+      }
+    >
+      {label}
+    </button>
+  );
+
   return (
     <>
-      <nav className="nav-tabs">
-        <div className="nav-tabs-center">
-          <button
-            className={`nav-tab${activeTab === 'investigacion' ? ' tab-active' : ''}`}
-            onClick={() => setActiveTab('investigacion')}
-          >
-            Investigación
-          </button>
-          <button
-            className={`nav-tab${activeTab === 'dashboard' ? ' tab-active' : ''}`}
-            onClick={() => setActiveTab('dashboard')}
-          >
-            Dashboard
-          </button>
-          <button
-            className={`nav-tab${activeTab === 'historial' ? ' tab-active' : ''}`}
-            onClick={() => setActiveTab('historial')}
-          >
-            Historial
-          </button>
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 pt-4">
+        <div className="bg-white rounded-xl p-1 border border-slate-200 flex gap-1 w-fit mb-4">
+          {innerTabBtn('investigacion', 'Investigación')}
+          {innerTabBtn('dashboard', 'Dashboard')}
+          {innerTabBtn('historial', 'Historial')}
         </div>
-      </nav>
+      </div>
 
-      <div className={`research-wrap${activeTab !== 'investigacion' ? ' rw-hidden' : ''}`}>
+      <div style={{ display: activeTab === 'investigacion' ? 'block' : 'none' }}>
         <ResearchPanel onSectorAdded={handleSectorAdded} />
       </div>
 
       {activeTab === 'dashboard' && (
-        <>
-          <TopBar editMode={editMode} onToggleEdit={() => setEditMode(m => !m)} />
-          <div className={`main${editMode ? ' edit-mode' : ''}`}>
-            <div className="dashboard-toolbar">
-              <button
-                className="dl-btn"
-                onClick={handleDownload}
-                disabled={dlLoading}
-              >
-                {dlLoading ? 'Descargando…' : '↓ Descargar HTML'}
-              </button>
-              {dlError && <span className="dl-error">{dlError}</span>}
-            </div>
-
-            <div className="slabel">Marco de scoring — 6 dimensiones ponderadas</div>
-            <WeightBar />
-            <TierLegend />
-
-            {loading && (
-              <div style={{ padding: '40px 0', textAlign: 'center', fontFamily: 'Verdana,sans-serif', color: 'var(--w60)' }}>
-                Cargando sectores…
-              </div>
-            )}
-
-            {error && (
-              <div style={{ padding: '20px', background: 'rgba(142,58,58,.08)', border: '1px solid rgba(142,58,58,.3)', borderRadius: 2, fontFamily: 'Verdana,sans-serif', fontSize: 14, color: '#8E3A3A' }}>
-                Error: {error}
-              </div>
-            )}
-
-            {!loading && !error && sectors.length > 0 && (
-              <>
-                <div className="slabel">Ranking — Score compuesto</div>
-                <RankList sectors={sectors} />
-
-                <div className="slabel">Ranking por tipo de activo</div>
-                <p style={{ fontFamily: 'Cambria,serif', fontStyle: 'italic', fontSize: 15, color: '#3A4E5E', margin: '-4px 0 14px', maxWidth: 880, lineHeight: 1.5 }}>
-                  Cada tipo de activo agrupa los sectores con presencia en ese formato, ordenados por score compuesto. El promedio refleja la calidad del mix de inquilinos típico para ese tipo de inmueble.
-                </p>
-                <ArchGrid sectors={sectors} />
-
-                <ScoringTable
-                  sectors={sectors}
-                  editMode={editMode}
-                  onDeleteSector={handleDeleteSector}
-                  onDeleteTab={handleDeleteTab}
-                />
-              </>
-            )}
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
+          <div className="flex items-center gap-3 mb-5">
+            <button
+              className="bg-emerald-500 text-white rounded-lg text-xs font-semibold px-4 py-2 hover:bg-emerald-600 transition-all disabled:opacity-50"
+              onClick={handleDownload}
+              disabled={dlLoading}
+            >
+              {dlLoading ? 'Descargando…' : '↓ Descargar HTML'}
+            </button>
+            <TopBar editMode={editMode} onToggleEdit={() => setEditMode(m => !m)} />
+            {dlError && <span className="text-xs text-red-600">{dlError}</span>}
           </div>
-        </>
+
+          <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Marco de scoring — 6 dimensiones ponderadas</div>
+          <WeightBar />
+          <TierLegend />
+
+          {loading && (
+            <div className="py-10 text-center text-sm text-slate-400">
+              Cargando sectores…
+            </div>
+          )}
+
+          {error && (
+            <div className="p-5 bg-red-50 border border-red-200 rounded-lg text-sm text-red-600">
+              Error: {error}
+            </div>
+          )}
+
+          {!loading && !error && sectors.length > 0 && (
+            <>
+              <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3 mt-8">Ranking — Score compuesto</div>
+              <RankList sectors={sectors} />
+
+              <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3 mt-8">Ranking por tipo de activo</div>
+              <p className="text-sm text-slate-500 italic -mt-1 mb-3.5 max-w-[880px] leading-relaxed">
+                Cada tipo de activo agrupa los sectores con presencia en ese formato, ordenados por score compuesto. El promedio refleja la calidad del mix de inquilinos típico para ese tipo de inmueble.
+              </p>
+              <ArchGrid sectors={sectors} />
+
+              <ScoringTable
+                sectors={sectors}
+                editMode={editMode}
+                onDeleteSector={handleDeleteSector}
+                onDeleteTab={handleDeleteTab}
+              />
+            </>
+          )}
+        </div>
       )}
 
       {activeTab === 'historial' && <HistorialPanel />}
@@ -198,7 +195,7 @@ export default function CapitalResearch({ active }) {
   );
 
   return (
-    <div className="cr-scope">
+    <div>
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 pt-4">
         <div className="bg-white rounded-xl p-1 border border-slate-200 flex gap-1 w-fit">
           {tabBtn('industrias', 'Investigación de Industrias')}

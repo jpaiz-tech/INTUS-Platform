@@ -1,4 +1,4 @@
-const PALETTE = ['#A88B4F', '#3A8E6C', '#4A7FA5', '#8E3A6C', '#7A6EA8', '#5A8E7A'];
+const PALETTE = ['#10b981', '#1e293b', '#f59e0b', '#059669', '#94a3b8', '#6366f1'];
 
 const W = 560, PAD_L = 48, PAD_R = 16, PAD_T = 20, PAD_B = 40;
 
@@ -40,17 +40,17 @@ function BarChart({ title, labels, datasets, height = 220 }) {
   const barW    = Math.min(groupW * 0.7 / dsCount, 44);
 
   return (
-    <div className="mi-chart-wrap">
-      {title && <div className="mi-chart-title">{title}</div>}
-      <svg viewBox={`0 0 ${W} ${height}`} className="mi-chart-svg" preserveAspectRatio="xMidYMid meet">
+    <div className="bg-white rounded-xl border border-slate-200 p-4">
+      {title && <div className="text-sm font-bold text-slate-700 mb-2">{title}</div>}
+      <svg viewBox={`0 0 ${W} ${height}`} className="w-full h-auto" preserveAspectRatio="xMidYMid meet">
         {/* Grid lines + Y labels */}
         {Array.from({ length: TICKS + 1 }, (_, i) => {
           const val = (maxVal / TICKS) * i;
           const y   = PAD_T + chartH - (val / maxVal) * chartH;
           return (
             <g key={i}>
-              <line x1={PAD_L} x2={W - PAD_R} y1={y} y2={y} stroke="rgba(255,255,255,0.07)" strokeWidth={1} />
-              <text x={PAD_L - 6} y={y + 4} textAnchor="end" fontSize={10} fill="rgba(255,255,255,0.65)">
+              <line x1={PAD_L} x2={W - PAD_R} y1={y} y2={y} stroke="#e2e8f0" strokeWidth={1} />
+              <text x={PAD_L - 6} y={y + 4} textAnchor="end" fontSize={10} fill="#94a3b8">
                 {val >= 1000 ? `${Math.round(val / 1000)}k` : Math.round(val)}
               </text>
             </g>
@@ -74,7 +74,7 @@ function BarChart({ title, labels, datasets, height = 220 }) {
                   />
                 );
               })}
-              <text x={cx} y={height - PAD_B + 16} textAnchor="middle" fontSize={10} fill="rgba(255,255,255,0.65)">
+              <text x={cx} y={height - PAD_B + 16} textAnchor="middle" fontSize={10} fill="#94a3b8">
                 {label.length > 11 ? label.slice(0, 10) + '…' : label}
               </text>
             </g>
@@ -87,7 +87,7 @@ function BarChart({ title, labels, datasets, height = 220 }) {
             {datasets.map((ds, di) => (
               <g key={di} transform={`translate(${di * 120}, 0)`}>
                 <rect width={10} height={10} y={-8} fill={ds.color || PALETTE[di % PALETTE.length]} rx={1} />
-                <text x={14} fontSize={9} fill="rgba(255,255,255,0.65)">{ds.label}</text>
+                <text x={14} fontSize={9} fill="#94a3b8">{ds.label}</text>
               </g>
             ))}
           </g>
@@ -102,9 +102,9 @@ function LineChart({ title, labels, datasets, height = 220 }) {
   const chartH = height - PAD_T - PAD_B;
   const allVals = datasets.flatMap(d => (d.values || []).filter(v => v != null));
   if (!allVals.length) return (
-    <div className="mi-chart-wrap">
-      {title && <div className="mi-chart-title">{title}</div>}
-      <div style={{ padding: '20px 0', textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.35)' }}>Sin datos disponibles</div>
+    <div className="bg-white rounded-xl border border-slate-200 p-4">
+      {title && <div className="text-sm font-bold text-slate-700 mb-2">{title}</div>}
+      <div className="py-5 text-center text-xs text-slate-400">Sin datos disponibles</div>
     </div>
   );
 
@@ -119,16 +119,16 @@ function LineChart({ title, labels, datasets, height = 220 }) {
   const yOf = v => PAD_T + chartH - ((v - minVal) / range) * chartH;
 
   return (
-    <div className="mi-chart-wrap">
-      {title && <div className="mi-chart-title">{title}</div>}
-      <svg viewBox={`0 0 ${W} ${height}`} className="mi-chart-svg" preserveAspectRatio="xMidYMid meet">
+    <div className="bg-white rounded-xl border border-slate-200 p-4">
+      {title && <div className="text-sm font-bold text-slate-700 mb-2">{title}</div>}
+      <svg viewBox={`0 0 ${W} ${height}`} className="w-full h-auto" preserveAspectRatio="xMidYMid meet">
         {/* Grid */}
         {ticks.map((val, i) => {
           const y = yOf(val);
           return (
             <g key={i}>
-              <line x1={PAD_L} x2={W - PAD_R} y1={y} y2={y} stroke="rgba(255,255,255,0.07)" strokeWidth={1} />
-              <text x={PAD_L - 6} y={y + 4} textAnchor="end" fontSize={10} fill="rgba(255,255,255,0.65)">
+              <line x1={PAD_L} x2={W - PAD_R} y1={y} y2={y} stroke="#e2e8f0" strokeWidth={1} />
+              <text x={PAD_L - 6} y={y + 4} textAnchor="end" fontSize={10} fill="#94a3b8">
                 {fmtTick(val)}
               </text>
             </g>
@@ -168,7 +168,7 @@ function LineChart({ title, labels, datasets, height = 220 }) {
             const isLast  = i === labels.length - 1;
             if (!isFirst && !isLast && i % step !== 0) return null;
             return (
-              <text key={i} x={xOf(i)} y={height - PAD_B + 16} textAnchor="middle" fontSize={10} fill="rgba(255,255,255,0.65)">
+              <text key={i} x={xOf(i)} y={height - PAD_B + 16} textAnchor="middle" fontSize={10} fill="#94a3b8">
                 {label.length > 9 ? label.slice(0, 8) + '…' : label}
               </text>
             );
@@ -181,7 +181,7 @@ function LineChart({ title, labels, datasets, height = 220 }) {
             {datasets.map((ds, di) => (
               <g key={di} transform={`translate(${di * 120}, 0)`}>
                 <line x1={0} x2={12} y1={-4} y2={-4} stroke={ds.color || PALETTE[di % PALETTE.length]} strokeWidth={2} />
-                <text x={16} fontSize={9} fill="rgba(255,255,255,0.65)">{ds.label}</text>
+                <text x={16} fontSize={9} fill="#94a3b8">{ds.label}</text>
               </g>
             ))}
           </g>

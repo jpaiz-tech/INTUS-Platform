@@ -57,14 +57,14 @@ export default function QueryView() {
   const printPeriod = filters.periodo || aggregated?.latest_periodo || '';
 
   return (
-    <div className="mi-query-view">
+    <div className="flex flex-col gap-4">
 
       {/* ── Filter bar (hidden on print) ── */}
-      <div className="mi-query-filters no-print">
-        <div className="mi-filter-group">
-          <label className="mi-filter-label">País</label>
+      <div className="no-print flex flex-wrap items-end gap-3 bg-white rounded-xl border border-slate-200 p-3">
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">País</label>
           <select
-            className="mi-filter-select"
+            className="px-3 py-1.5 text-xs font-medium border border-slate-200 rounded-lg bg-white focus:outline-none"
             value={filters.pais}
             onChange={e => setFilters(f => ({ ...f, pais: e.target.value }))}
           >
@@ -73,10 +73,10 @@ export default function QueryView() {
           </select>
         </div>
 
-        <div className="mi-filter-group">
-          <label className="mi-filter-label">Sector</label>
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Sector</label>
           <select
-            className="mi-filter-select"
+            className="px-3 py-1.5 text-xs font-medium border border-slate-200 rounded-lg bg-white focus:outline-none"
             value={filters.sector}
             onChange={e => setFilters(f => ({ ...f, sector: e.target.value }))}
           >
@@ -85,10 +85,10 @@ export default function QueryView() {
           </select>
         </div>
 
-        <div className="mi-filter-group">
-          <label className="mi-filter-label">Período</label>
+        <div className="flex flex-col gap-1">
+          <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Período</label>
           <select
-            className="mi-filter-select"
+            className="px-3 py-1.5 text-xs font-medium border border-slate-200 rounded-lg bg-white focus:outline-none"
             value={filters.periodo}
             onChange={e => setFilters(f => ({ ...f, periodo: e.target.value }))}
           >
@@ -99,61 +99,61 @@ export default function QueryView() {
           </select>
         </div>
 
-        <button className="mi-search-btn" onClick={fetchData} disabled={loading}>
-          {loading ? <span className="mi-spinner" /> : 'Buscar'}
+        <button className="bg-emerald-500 text-white rounded-lg text-xs font-semibold px-4 py-2 hover:bg-emerald-600 transition-all disabled:opacity-50" onClick={fetchData} disabled={loading}>
+          {loading ? <span className="inline-block w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" /> : 'Buscar'}
         </button>
 
         {aggregated && (
-          <button className="mi-print-btn no-print" onClick={() => window.print()}>
+          <button className="no-print border border-slate-200 text-slate-500 rounded-lg text-xs font-semibold px-4 py-2 hover:border-emerald-300 hover:text-emerald-600 transition-all" onClick={() => window.print()}>
             Imprimir / PDF
           </button>
         )}
       </div>
 
-      {error && <div className="mi-chat-error no-print">{error}</div>}
+      {error && <div className="no-print bg-red-50 border border-red-200 rounded-lg text-xs text-red-600 p-3">{error}</div>}
 
       {loading && (
-        <div className="mi-query-results mi-loading-state no-print">
-          <span className="mi-spinner" />
+        <div className="no-print flex items-center justify-center gap-2 py-10 text-sm text-slate-400">
+          <span className="inline-block w-4 h-4 border-2 border-slate-200 border-t-emerald-500 rounded-full animate-spin" />
           <span>Cargando datos…</span>
         </div>
       )}
 
       {!loading && aggregated && (
-        <div className="mi-query-results">
+        <div className="flex flex-col gap-4">
 
           {/* Print-only header */}
-          <div className="mi-print-header print-only">
-            <div className="mi-print-logo">ETRA</div>
-            <div className="mi-print-title">{printTitle}</div>
-            {printPeriod && <div className="mi-print-period">{printPeriod}</div>}
+          <div className="print-only">
+            <div className="text-lg font-bold text-slate-800">ETRA</div>
+            <div className="text-base font-semibold text-slate-700">{printTitle}</div>
+            {printPeriod && <div className="text-xs text-slate-400">{printPeriod}</div>}
           </div>
 
           {/* Coverage bar */}
-          <div className="mi-coverage-bar no-print">
+          <div className="no-print flex items-center gap-2 text-xs text-slate-500">
             <span>{aggregated.subzona_count ?? aggregated.by_subzona?.length ?? 0} subzonas</span>
-            <span className="mi-coverage-sep">·</span>
+            <span className="text-slate-300">·</span>
             <span>{aggregated.source_count ?? 0} fuentes</span>
-            <span className="mi-coverage-sep">·</span>
+            <span className="text-slate-300">·</span>
             <span>Período más reciente: <strong>{aggregated.latest_periodo || '—'}</strong></span>
           </div>
 
           {/* Metric cards */}
           {aggregated.metric_cards?.length > 0 && (
-            <div className="mi-cards-grid">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
               {aggregated.metric_cards.map((card, i) => (
-                <div key={i} className={`mi-card${card.missing ? ' mi-card-missing' : ''}${card.hasRange ? ' mi-card-range' : ''}`}>
-                  <div className="mi-card-label">{card.label}</div>
-                  <div className="mi-card-value">
+                <div key={i} className={`bg-white rounded-xl border border-slate-200 p-4 ${card.missing ? 'opacity-50' : ''}`}>
+                  <div className="text-[11px] text-slate-400 uppercase tracking-wider mb-1">{card.label}</div>
+                  <div className="text-xl font-bold text-slate-800 font-mono">
                     {card.missing ? 'sin datos' : card.value}
                   </div>
                   {!card.missing && (
                     <>
-                      <div className="mi-card-unit">
+                      <div className="text-xs text-slate-400 mt-1">
                         {card.unit}
-                        {card.hasRange && <span className="mi-card-range-tag"> rango</span>}
+                        {card.hasRange && <span className="text-[10px] text-emerald-600 ml-1">rango</span>}
                       </div>
-                      <div className="mi-card-period">{card.period || aggregated.latest_periodo}</div>
+                      <div className="text-[11px] text-slate-400 mt-1">{card.period || aggregated.latest_periodo}</div>
                     </>
                   )}
                 </div>
@@ -166,42 +166,42 @@ export default function QueryView() {
             const subzonas = (aggregated.by_subzona || [])
               .sort((a, b) => (b.renta_prom_m2_mes ?? -Infinity) - (a.renta_prom_m2_mes ?? -Infinity));
             return subzonas.length > 0 && (
-              <div className="mi-table-wrap">
-                <table className="mi-data-table">
+              <div className="overflow-x-auto bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
+                <table className="w-full text-sm">
                   <thead>
-                    <tr>
-                      <th>Subzona</th>
-                      <th>Período</th>
-                      <th>Renta (USD/m²/mes)</th>
-                      <th>Disponibilidad</th>
-                      <th>Inventario (m²)</th>
-                      <th>Absorción Neta (m²)</th>
-                      <th>Cap Rate</th>
+                    <tr className="border-b-2 border-slate-200">
+                      <th className="text-left py-2 px-3 text-xs font-bold text-slate-400 uppercase">Subzona</th>
+                      <th className="text-left py-2 px-3 text-xs font-bold text-slate-400 uppercase">Período</th>
+                      <th className="text-left py-2 px-3 text-xs font-bold text-slate-400 uppercase">Renta (USD/m²/mes)</th>
+                      <th className="text-left py-2 px-3 text-xs font-bold text-slate-400 uppercase">Disponibilidad</th>
+                      <th className="text-left py-2 px-3 text-xs font-bold text-slate-400 uppercase">Inventario (m²)</th>
+                      <th className="text-left py-2 px-3 text-xs font-bold text-slate-400 uppercase">Absorción Neta (m²)</th>
+                      <th className="text-left py-2 px-3 text-xs font-bold text-slate-400 uppercase">Cap Rate</th>
                     </tr>
                   </thead>
                   <tbody>
                     {subzonas.map((row, i) => (
-                      <tr key={i}>
-                        <td>
+                      <tr key={i} className="border-b border-slate-100 hover:bg-emerald-50/30">
+                        <td className="py-2 px-3 text-slate-700">
                           {row.subzona || row.ciudad || '—'}
-                          {row._rowCount > 1 && <span className="mi-row-multi"> ×{row._rowCount}</span>}
+                          {row._rowCount > 1 && <span className="text-slate-400 text-xs ml-1">×{row._rowCount}</span>}
                         </td>
-                        <td>{row.periodo || '—'}</td>
-                        <td>
+                        <td className="py-2 px-3 text-slate-700 font-mono text-xs">{row.periodo || '—'}</td>
+                        <td className="py-2 px-3 font-mono text-xs text-slate-700">
                           {row.renta_prom_m2_mes_min != null
-                            ? <span className="mi-range-val">{fmt(row.renta_prom_m2_mes_min)}–{fmt(row.renta_prom_m2_mes_max)}</span>
+                            ? <span className="font-mono text-xs text-slate-600">{fmt(row.renta_prom_m2_mes_min)}–{fmt(row.renta_prom_m2_mes_max)}</span>
                             : fmt(row.renta_prom_m2_mes)}
                         </td>
-                        <td>
+                        <td className="py-2 px-3 font-mono text-xs text-slate-700">
                           {row.disponibilidad_min != null
-                            ? <span className="mi-range-val">{fmtPct(row.disponibilidad_min)}–{fmtPct(row.disponibilidad_max)}</span>
+                            ? <span className="font-mono text-xs text-slate-600">{fmtPct(row.disponibilidad_min)}–{fmtPct(row.disponibilidad_max)}</span>
                             : fmtPct(row.disponibilidad)}
                         </td>
-                        <td>{row.inventario_total_m2 != null ? row.inventario_total_m2.toLocaleString('es-PA') : '—'}</td>
-                        <td>{row.absorc_neta_trim_m2 != null ? row.absorc_neta_trim_m2.toLocaleString('es-PA') : '—'}</td>
-                        <td>
+                        <td className="py-2 px-3 font-mono text-xs text-slate-700">{row.inventario_total_m2 != null ? row.inventario_total_m2.toLocaleString('es-PA') : '—'}</td>
+                        <td className="py-2 px-3 font-mono text-xs text-slate-700">{row.absorc_neta_trim_m2 != null ? row.absorc_neta_trim_m2.toLocaleString('es-PA') : '—'}</td>
+                        <td className="py-2 px-3 font-mono text-xs text-slate-700">
                           {row.cap_rate_min != null
-                            ? <span className="mi-range-val">{fmtPct(row.cap_rate_min)}–{fmtPct(row.cap_rate_max)}</span>
+                            ? <span className="font-mono text-xs text-slate-600">{fmtPct(row.cap_rate_min)}–{fmtPct(row.cap_rate_max)}</span>
                             : fmtPct(row.cap_rate)}
                         </td>
                       </tr>
@@ -214,30 +214,30 @@ export default function QueryView() {
 
           {/* Por Clase breakdown */}
           {aggregated.by_tipo?.length > 0 && (
-            <div className="mi-table-wrap">
-              <div className="mi-section-label">Por Clase</div>
-              <table className="mi-data-table">
+            <div className="overflow-x-auto bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
+              <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Por Clase</div>
+              <table className="w-full text-sm">
                 <thead>
-                  <tr>
-                    <th>Clase</th>
-                    <th>Renta (USD/m²/mes)</th>
-                    <th>Inventario Total (m²)</th>
-                    <th>Disponibilidad Prom.</th>
-                    <th>Subzonas</th>
+                  <tr className="border-b-2 border-slate-200">
+                    <th className="text-left py-2 px-3 text-xs font-bold text-slate-400 uppercase">Clase</th>
+                    <th className="text-left py-2 px-3 text-xs font-bold text-slate-400 uppercase">Renta (USD/m²/mes)</th>
+                    <th className="text-left py-2 px-3 text-xs font-bold text-slate-400 uppercase">Inventario Total (m²)</th>
+                    <th className="text-left py-2 px-3 text-xs font-bold text-slate-400 uppercase">Disponibilidad Prom.</th>
+                    <th className="text-left py-2 px-3 text-xs font-bold text-slate-400 uppercase">Subzonas</th>
                   </tr>
                 </thead>
                 <tbody>
                   {aggregated.by_tipo.map((row, i) => (
-                    <tr key={i}>
-                      <td style={{ fontWeight: 600 }}>{row.tipo}</td>
-                      <td>
+                    <tr key={i} className="border-b border-slate-100 hover:bg-emerald-50/30">
+                      <td className="py-2 px-3 font-semibold text-slate-700">{row.tipo}</td>
+                      <td className="py-2 px-3 font-mono text-xs text-slate-700">
                         {row.renta_max != null
-                          ? <span className="mi-range-val">{fmt(row.renta_min)}–{fmt(row.renta_max)}</span>
+                          ? <span className="font-mono text-xs text-slate-600">{fmt(row.renta_min)}–{fmt(row.renta_max)}</span>
                           : fmt(row.renta_min)}
                       </td>
-                      <td>{row.inventario_total_m2 != null ? Math.round(row.inventario_total_m2).toLocaleString('es-PA') : '—'}</td>
-                      <td>{row.disponibilidad_avg != null ? fmtPct(row.disponibilidad_avg) : '—'}</td>
-                      <td>{row.subzona_count}</td>
+                      <td className="py-2 px-3 font-mono text-xs text-slate-700">{row.inventario_total_m2 != null ? Math.round(row.inventario_total_m2).toLocaleString('es-PA') : '—'}</td>
+                      <td className="py-2 px-3 font-mono text-xs text-slate-700">{row.disponibilidad_avg != null ? fmtPct(row.disponibilidad_avg) : '—'}</td>
+                      <td className="py-2 px-3 font-mono text-xs text-slate-700">{row.subzona_count}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -255,7 +255,7 @@ export default function QueryView() {
                 datasets={[{
                   label:  'Renta (USD/m²/mes)',
                   values: trend.map(r => r.renta_prom_m2_mes),
-                  color:  '#A88B4F',
+                  color:  '#10b981',
                 }]}
               />
               {trend.some(r => r.disponibilidad != null) && (
@@ -270,7 +270,7 @@ export default function QueryView() {
                         ? +(r.disponibilidad < 1 ? r.disponibilidad * 100 : r.disponibilidad).toFixed(1)
                         : null
                     ),
-                    color:  '#4A7FA5',
+                    color:  '#1e293b',
                   }]}
                 />
               )}
@@ -278,7 +278,7 @@ export default function QueryView() {
           )}
 
           {/* Print footer */}
-          <div className="mi-print-footer print-only">
+          <div className="print-only text-xs text-slate-400 text-center mt-4">
             Fuente: Base de datos ETRA · {new Date().toLocaleDateString('es-PA', { year: 'numeric', month: 'long', day: 'numeric' })}
           </div>
 

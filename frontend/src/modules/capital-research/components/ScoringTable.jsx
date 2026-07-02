@@ -1,5 +1,5 @@
 import { useState, Fragment } from 'react';
-import { scoreColor, tier, tierClass, IRO_MAP } from '../utils.js';
+import { scoreColor, tier, IRO_MAP } from '../utils.js';
 import ExpandPanel from './ExpandPanel.jsx';
 
 const DIM_HEADERS = [
@@ -10,16 +10,29 @@ const DIM_HEADERS = [
   { label: 'RESILIENCIA', pct: '17%' },
 ];
 
-function SpaRow({ d, expanded }) {
-  const sc = scoreColor(d.score);
-  const tc = tierClass(d.score);
-  const t  = tier(d.score);
+const TIER_CLS = {
+  'A+': 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  A:    'bg-emerald-50 text-emerald-600 border-emerald-200',
+  B:    'bg-amber-50 text-amber-700 border-amber-200',
+  C:    'bg-orange-50 text-orange-700 border-orange-200',
+  D:    'bg-red-50 text-red-600 border-red-200',
+};
 
+function TierBadge({ score }) {
+  const t = tier(score);
   return (
-    <tr className={`spa-row${expanded ? ' is-expanded' : ''}`}>
-      <td colSpan={9} style={{ padding: 0, background: 'var(--w08)' }}>
-        <div className="spa-inner">
-          <span className="spa-label">Score por formato</span>
+    <span className={`inline-flex items-center justify-center text-xs font-bold px-1.5 py-0.5 border rounded ${TIER_CLS[t] || 'bg-slate-50 text-slate-500 border-slate-200'}`}>
+      {t}
+    </span>
+  );
+}
+
+function SpaRow({ d, expanded }) {
+  return (
+    <tr className={expanded ? 'bg-emerald-50/40' : ''}>
+      <td colSpan={9} className="p-0 bg-slate-50">
+        <div className="flex items-center gap-2 py-1.5 px-3 pl-5 flex-wrap">
+          <span className="text-xs font-bold uppercase tracking-wide text-slate-400 whitespace-nowrap mr-1">Score por formato</span>
           {d.dimScores
             ? d.dimScores.map((rt, idx) => {
                 const chip = d.assetChips
@@ -27,7 +40,6 @@ function SpaRow({ d, expanded }) {
                   : null;
                 const s2  = chip ? chip.score : d.score;
                 const c2  = scoreColor(s2);
-                const tc2 = tierClass(s2);
                 const matchingTab = d.tabs
                   ? d.tabs.find(tb => tb.shortLabel.toLowerCase() === rt.label.toLowerCase())
                   : null;
@@ -35,19 +47,21 @@ function SpaRow({ d, expanded }) {
                 const iroL = rt.label.toLowerCase() === 'promedio'
                   ? '' : (IRO_MAP[tabAssetLabel] || IRO_MAP[rt.label] || '');
                 return (
-                  <div key={idx} className="spa-chip">
-                    {iroL && <span className="iro-badge" style={{ marginLeft: 0, marginRight: 2, opacity: 0.7 }}>{iroL}</span>}
-                    <span className="spa-chip-label">{rt.label.toUpperCase()}</span>
-                    <span className="spa-chip-score" style={{ color: c2 }}>{s2}</span>
-                    <span className={`rank-tier ${tc2}`} style={{ fontSize: 12, padding: '1px 5px', color: c2, borderColor: `${c2}50` }}>{tier(s2)}</span>
+                  <div key={idx} className="inline-flex items-center gap-1.5 border border-slate-200 px-2.5 py-0.5 rounded bg-white">
+                    {iroL && (
+                      <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-slate-700 text-white text-[10px] font-bold">{iroL}</span>
+                    )}
+                    <span className="text-xs text-slate-400 tracking-wide">{rt.label.toUpperCase()}</span>
+                    <span className="font-mono font-bold text-sm" style={{ color: c2 }}>{s2}</span>
+                    <TierBadge score={s2} />
                   </div>
                 );
               })
             : (
-              <div className="spa-chip">
-                <span className="spa-chip-label">{d.assets?.[0]?.toUpperCase() ?? ''}</span>
-                <span className="spa-chip-score" style={{ color: sc }}>{d.score}</span>
-                <span className={`rank-tier ${tc}`} style={{ fontSize: 12, padding: '1px 5px' }}>{t}</span>
+              <div className="inline-flex items-center gap-1.5 border border-slate-200 px-2.5 py-0.5 rounded bg-white">
+                <span className="text-xs text-slate-400 tracking-wide">{d.assets?.[0]?.toUpperCase() ?? ''}</span>
+                <span className="font-mono font-bold text-sm" style={{ color: scoreColor(d.score) }}>{d.score}</span>
+                <TierBadge score={d.score} />
               </div>
             )
           }
@@ -85,33 +99,33 @@ export default function ScoringTable({ sectors, editMode, onDeleteSector, onDele
 
   return (
     <>
-      <div className="slabel">Matriz de scoring — haga clic en una fila para ver el detalle</div>
-      <div className="pending-note">
+      <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Matriz de scoring — haga clic en una fila para ver el detalle</div>
+      <div className="text-xs text-slate-400 italic text-center pb-2.5">
         Sub-criterios cargados para todos los sectores detallados · cadena de cálculo determinística: sub-criterios → dimensión (promedio ×10) → score por formato (ponderado) → compuesto (promedio entre formatos, ponderado)
       </div>
       {deleteError && (
-        <div style={{ marginBottom: 8, padding: '8px 12px', background: 'rgba(142,58,58,.08)', border: '1px solid rgba(142,58,58,.3)', borderRadius: 2, fontFamily: 'Verdana,sans-serif', fontSize: 13, color: '#8E3A3A' }}>
+        <div className="mb-2 px-3 py-2 bg-red-50 border border-red-200 rounded-lg text-sm text-red-600">
           {deleteError}
         </div>
       )}
-      <div className="table-wrap">
-        <table>
+      <div className="overflow-x-auto mb-10">
+        <table className="w-full text-sm border-collapse min-w-[960px]">
           <thead>
-            <tr>
-              <th className="left" style={{ width: 200 }}>Industria / Sector</th>
+            <tr className="border-b-2 border-slate-200">
+              <th className="text-left py-2.5 px-3 text-xs font-bold text-slate-400 uppercase whitespace-nowrap" style={{ width: 200 }}>Industria / Sector</th>
               {DIM_HEADERS.map(h => (
-                <th key={h.label}>{h.label}<br /><span style={{ opacity: .5, fontSize: 11 }}>{h.pct}</span></th>
+                <th key={h.label} className="text-center py-2.5 px-2 text-xs font-bold text-slate-400 uppercase whitespace-nowrap">
+                  {h.label}<br /><span className="opacity-50 font-normal normal-case text-[11px]">{h.pct}</span>
+                </th>
               ))}
-              <th>SCORE</th>
-              <th>TIER</th>
-              <th>ACTIVO</th>
+              <th className="text-center py-2.5 px-2 text-xs font-bold text-slate-400 uppercase whitespace-nowrap">SCORE</th>
+              <th className="text-center py-2.5 px-2 text-xs font-bold text-slate-400 uppercase whitespace-nowrap">TIER</th>
+              <th className="text-center py-2.5 px-2 text-xs font-bold text-slate-400 uppercase whitespace-nowrap">ACTIVO</th>
             </tr>
           </thead>
           <tbody>
             {sectors.map((d, i) => {
               const sc         = scoreColor(d.score);
-              const tc         = tierClass(d.score);
-              const t          = tier(d.score);
               const isExpanded = expandedIdx === i;
               const isConfirm  = confirmIdx  === i;
               const isDeleting = deletingName === d.name;
@@ -120,33 +134,41 @@ export default function ScoringTable({ sectors, editMode, onDeleteSector, onDele
               return (
                 <Fragment key={`sector-${i}`}>
                   <tr
-                    className={`sector-row${isExpanded ? ' is-expanded' : ''}${isConfirm ? ' confirm-pending' : ''}`}
+                    className={`border-b border-slate-100 transition-colors ${editMode ? '' : 'cursor-pointer hover:bg-emerald-50/30'} ${isExpanded ? 'bg-emerald-50/40' : ''}`}
                     onClick={() => toggle(i, d)}
                   >
-                    <td>
-                      <div className="ind-name" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                        <span style={{ flex: 1 }}>
+                    <td className="py-3 px-3">
+                      <div className="flex items-center gap-1">
+                        <span className="flex-1 text-sm font-bold text-slate-800">
                           {d.name}
                           {!editMode && d.hasDetail && (
-                            <span style={{ fontSize: 13, color: 'var(--green)', marginLeft: 6, opacity: .7 }}>▸</span>
+                            <span className="text-xs text-emerald-500 ml-1.5 opacity-70">▸</span>
                           )}
                         </span>
                         {editMode && (
                           <button
-                            className="delete-row-btn"
+                            className="text-slate-300 hover:text-red-500 text-sm font-bold px-1.5"
                             title={`Eliminar ${d.name}`}
                             onClick={e => { e.stopPropagation(); setConfirmIdx(i); setDeleteError(null); }}
                           >×</button>
                         )}
                       </div>
-                      <div className="ind-sub">{d.sub}</div>
+                      <div className="text-xs text-slate-400 mt-0.5">{d.sub}</div>
                       {isConfirm && (
-                        <div className="confirm-inline" onClick={e => e.stopPropagation()}>
-                          <span className="confirm-msg">¿Eliminar <strong>{d.name}</strong>? Esta acción no se puede deshacer.</span>
-                          <button className="confirm-yes" onClick={() => confirmDelete(d.name)} disabled={isDeleting}>
+                        <div className="flex items-center gap-2 mt-2 p-2 bg-red-50 border border-red-200 rounded-lg flex-wrap" onClick={e => e.stopPropagation()}>
+                          <span className="text-xs text-slate-600 flex-1">¿Eliminar <strong>{d.name}</strong>? Esta acción no se puede deshacer.</span>
+                          <button
+                            className="bg-red-500 text-white rounded-lg text-xs font-semibold px-3 py-1.5 hover:bg-red-600 transition-all disabled:opacity-50"
+                            onClick={() => confirmDelete(d.name)}
+                            disabled={isDeleting}
+                          >
                             {isDeleting ? 'Eliminando…' : 'Eliminar'}
                           </button>
-                          <button className="confirm-no" onClick={() => setConfirmIdx(null)} disabled={isDeleting}>
+                          <button
+                            className="border border-slate-200 text-slate-500 rounded-lg text-xs font-semibold px-3 py-1.5 hover:border-emerald-300 hover:text-emerald-600 transition-all disabled:opacity-50"
+                            onClick={() => setConfirmIdx(null)}
+                            disabled={isDeleting}
+                          >
                             Cancelar
                           </button>
                         </div>
@@ -155,31 +177,34 @@ export default function ScoringTable({ sectors, editMode, onDeleteSector, onDele
 
                     {DIM_HEADERS.map((_, dimIdx) => {
                       if (!primary) {
-                        return <td key={dimIdx} className="dim-cell"><span className="dim-pending">—</span></td>;
+                        return <td key={dimIdx} className="text-center py-2.5 px-2"><span className="text-xl font-mono text-slate-200 tracking-wide">—</span></td>;
                       }
                       const s   = primary.scores[dimIdx] ?? 0;
                       const c   = scoreColor(s);
                       const avg = (s / 10).toFixed(1);
                       return (
-                        <td key={dimIdx} className="dim-cell">
-                          <div className="dim-score-main" style={{ color: c }}>{s}</div>
-                          <div className="dim-avg-label">avg {avg}/10</div>
+                        <td key={dimIdx} className="text-center py-2.5 px-2">
+                          <div className="font-mono font-bold text-2xl leading-none mb-1" style={{ color: c }}>{s}</div>
+                          <div className="text-xs text-slate-400">avg {avg}/10</div>
                         </td>
                       );
                     })}
 
-                    <td className="final-cell">
-                      <div className="final-box" style={{ borderColor: `${sc}60`, background: `${sc}08` }}>
-                        <div className="final-num" style={{ color: sc }}>{d.score}</div>
-                        <div className="final-sub">/ 100</div>
+                    <td className="text-center py-2.5 px-2">
+                      <div
+                        className="inline-flex flex-col items-center justify-center w-[52px] h-[52px] border-[1.5px] rounded-lg"
+                        style={{ borderColor: `${sc}60`, background: `${sc}08` }}
+                      >
+                        <div className="font-mono font-bold text-xl leading-none" style={{ color: sc }}>{d.score}</div>
+                        <div className="text-[11px] opacity-50 mt-0.5">/ 100</div>
                       </div>
                     </td>
-                    <td style={{ textAlign: 'center' }}>
-                      <span className={`rank-tier ${tc}`}>{t}</span>
+                    <td className="text-center py-2.5 px-2">
+                      <TierBadge score={d.score} />
                     </td>
-                    <td>
+                    <td className="py-2.5 px-2">
                       {(d.assets || []).map(a => (
-                        <span key={a} className="atag">{a}</span>
+                        <span key={a} className="inline-block px-1.5 py-0.5 border border-slate-200 rounded text-xs font-bold text-slate-500 mx-0.5 my-0.5">{a}</span>
                       ))}
                     </td>
                   </tr>
@@ -187,8 +212,8 @@ export default function ScoringTable({ sectors, editMode, onDeleteSector, onDele
                   <SpaRow d={d} expanded={isExpanded} />
 
                   {isExpanded && d.hasDetail && (
-                    <tr className="expand-row">
-                      <td colSpan={9} className="expand-td">
+                    <tr>
+                      <td colSpan={9} className="p-0 border-b-2 border-emerald-200">
                         <ExpandPanel d={d} editMode={editMode} onDeleteTab={onDeleteTab} />
                       </td>
                     </tr>

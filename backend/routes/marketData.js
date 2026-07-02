@@ -5,6 +5,7 @@ import {
   queryMarketData, upsertManyRows, findConflicts, commitRows,
   getMarketCoverage, getColumnStructure, deleteStaleSheetRows,
   findSimilarRows, findNumericSimilarity, getSheetStyleContext,
+  logIngestion, getIngestionHistory,
 } from '../services/marketDataDb.js';
 import { normalizeAliases } from '../services/marketDataAggregator.js';
 import {
@@ -153,7 +154,9 @@ function deriveSheetTab(row) {
 // sheet_locked rows (source_type='sheet_sync') are never sent by the frontend,
 // but are filtered here as a safety net.
 marketDataRouter.post('/confirm', async (req, res) => {
-  const { confirmed_rows } = req.body;
+  const {
+    confirmed_rows, source_type, file_name, source_description, extraction_notes,
+  } = req.body;
 
   if (!Array.isArray(confirmed_rows) || confirmed_rows.length === 0) {
     return res.status(400).json({ error: 'confirmed_rows array is required' });
@@ -168,6 +171,16 @@ marketDataRouter.post('/confirm', async (req, res) => {
 
   try {
     const results = await commitRows(toWrite);
+
+    logIngestion({
+      source_type:        source_type || 'pasted_text',
+      file_name,
+      source_description,
+      extraction_notes,
+      rows_proposed:      confirmed_rows.length,
+      rows_inserted:      results.filter(r => r.action === 'inserted').length,
+      rows_updated:       results.filter(r => r.action === 'updated').length,
+    });
 
     // Push each confirmed row to the Google Sheet SEQUENTIALLY — Apps Script
     // computes "next empty row" by re-reading the sheet on every request, so
@@ -219,6 +232,18 @@ marketDataRouter.get('/coverage', async (req, res) => {
     return res.json({ total: rows.length, grouped });
   } catch (err) {
     console.error(`[market-data] coverage error: ${err.message}`);
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+// ── GET /api/market-data/history ──────────────────────────────────────────────
+// History of confirmed PDF/pasted-text uploads — for the Historial tab.
+marketDataRouter.get('/history', async (_req, res) => {
+  try {
+    const ingestions = await getIngestionHistory();
+    return res.json({ ingestions });
+  } catch (err) {
+    console.error(`[market-data] history error: ${err.message}`);
     return res.status(500).json({ error: err.message });
   }
 });

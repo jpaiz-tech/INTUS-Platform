@@ -1,4 +1,4 @@
-import { scoreColor, tier, tierClass } from '../utils.js';
+import { scoreColor, tier } from '../utils.js';
 
 const ARCH_TYPES = ['Industrial', 'Retail', 'Oficinas'];
 
@@ -62,33 +62,33 @@ export default function ArchGrid({ sectors }) {
   const cards = buildArchCards(sectors);
 
   return (
-    <div className="arch-grid">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(290px,1fr))] gap-3.5 mb-9">
       {cards.map(({ assetType, meta, matching, avg, sc }) => (
-        <div className="arch-card" key={assetType}>
-          <div className="arch-eyebrow">{meta.eyebrow}</div>
-          <div className="arch-head">
-            <div className="arch-name">
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4" key={assetType}>
+          <div className="text-[11px] font-bold uppercase tracking-widest text-emerald-600 mb-1.5 opacity-80">{meta.eyebrow}</div>
+          <div className="flex justify-between items-start mb-2.5">
+            <div className="text-sm font-bold text-slate-800 leading-snug">
               {meta.name}<br />
-              <span style={{ fontWeight: 400, fontSize: 14, color: 'var(--w60)' }}>{meta.sub}</span>
+              <span className="font-normal text-sm text-slate-400">{meta.sub}</span>
             </div>
-            <div className="arch-score" style={{ color: sc }}>
-              {avg}<small>TIER {tier(avg)}</small>
+            <div className="font-mono font-bold text-2xl text-right ml-3 leading-none" style={{ color: sc }}>
+              {avg}<small className="block text-[11px] font-normal uppercase tracking-wide opacity-60 mt-0.5">TIER {tier(avg)}</small>
             </div>
           </div>
-          <div className="arch-comps">
+          <div className="flex flex-col gap-1 mb-2.5">
             {matching.slice(0, 5).map((d, i) => (
-              <div className="arch-comp" key={d.name}>
-                <span className="ac-rank">{i + 1}</span>
+              <div className="grid grid-cols-[18px_1fr_30px] items-center gap-1.5 text-sm text-slate-500" key={d.name}>
+                <span className="font-mono text-xs text-slate-400 text-right opacity-60">{i + 1}</span>
                 <span>{d.name}{d.sub ? ` — ${d.sub.split('—')[0].trim()}` : ''}</span>
-                <span className="ac-s">{Math.round(formatScore(d, assetType))}</span>
+                <span className="font-mono font-bold text-sm text-right text-slate-800">{Math.round(formatScore(d, assetType))}</span>
               </div>
             ))}
           </div>
-          <div className="arch-avg">
-            <span className="arch-avg-label">promedio</span>
-            <span className="arch-avg-score">{avg}</span>
+          <div className="flex justify-between items-baseline pt-2 mt-0.5 border-t border-slate-200">
+            <span className="text-xs uppercase tracking-wide text-slate-400">promedio</span>
+            <span className="font-mono font-bold text-lg text-emerald-600">{avg}</span>
           </div>
-          <div className="arch-verdict">{meta.verdict}</div>
+          <div className="text-sm italic text-slate-500 leading-relaxed border-t border-slate-100 pt-2 mt-2.5">{meta.verdict}</div>
         </div>
       ))}
     </div>
