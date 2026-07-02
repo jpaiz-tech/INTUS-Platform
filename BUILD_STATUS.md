@@ -57,24 +57,28 @@ FROZEN — never modify it.
 
 ## ⬜ Remaining
 
-1. **Browser verify** — start both servers and confirm:
-   - Referenciales tables render (REF_DATA fix not yet hard-reloaded in browser).
-   - Capital Research sub-tabs render, research form hits backend, historial lists
-     runs, Mercado dashboard renders, no CSS bleed.
-   - No console errors on any tab.
+1. **Browser verify** — both servers confirmed running (backend :3002, frontend
+   :5174/:5199). Signed in successfully as jpaiz@intuscorp.com (password auth).
+   - ✅ Hub renders, all 5 tabs visible.
+   - ✅ Prefactibilidad — TIR/MOIC parity confirmed earlier.
+   - ✅ Mapa Estratégico — confirmed earlier.
+   - ✅ Referenciales — FIXED and verified: table renders with 12 projects,
+     category/zone/type filters, Construcción/Equipo/Técnico cost breakdown.
+     (Needed a second fix beyond REF_DATA: REF_CATEGORIES and REF_CHAR_LABELS
+     were also used in Referenciales.jsx but never exported from Platform.jsx —
+     fixed in commit a20a97f.)
+   - ⬜ Capital Research — NOT YET clicked/verified this session. Do this next.
+   - Known cosmetic bug (pre-existing in source HTML, not introduced by the
+     port): some project names in Referenciales show mojibake, e.g. "VERDÃš"
+     instead of "VERDÚ", "VILÃ‰" instead of "VILLÉ" — double UTF-8 encoding
+     baked into the original intus_platform_1.html data. Low priority, cosmetic
+     only, doesn't block functionality.
 
-2. **User-side steps** (documented in `supabase/schema.sql`):
-   - Create `frontend/.env`:
-     ```
-     VITE_SUPABASE_URL=https://xxxx.supabase.co
-     VITE_SUPABASE_ANON_KEY=eyJ...
-     VITE_API_BASE=http://localhost:3002
-     ```
-     (Anon key: Supabase dashboard → Settings → API. Service key is already in
-     `backend/.env` — copied from original. Frontend Supabase keys were previously
-     only in Vercel env vars, never in a local file.)
-   - Run `supabase/schema.sql` in Supabase SQL editor.
-   - Google OAuth: create OAuth client in Google Cloud Console, enable Google
+2. **User-side steps**:
+   - ✅ `frontend/.env` created with VITE_SUPABASE_URL + VITE_SUPABASE_ANON_KEY + VITE_API_BASE.
+   - ✅ `supabase/schema.sql` run in Supabase SQL editor.
+   - ⏸️ **Google OAuth skipped for now** (user's choice) — app runs fine without it via
+     modo local / password auth. Revisit later: create OAuth client in Google Cloud Console, enable Google
      provider in Supabase Auth, add redirect URL http://localhost:5174.
 
 3. **Platform projects migration**: export JSON from the old HTML app
